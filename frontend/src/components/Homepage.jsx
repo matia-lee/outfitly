@@ -1,11 +1,12 @@
-import '../static/Homepage.css'
+import "../static/Homepage.css";
 
 const Homepage = () => {
-    return (
-        <div className="test">
-            Hello World
-        </div>
-    );
+  return (
+    <div className="test">
+      <div>Hello</div>
+      <div>world</div>
+    </div>
+  );
 };
 
 export default Homepage;
