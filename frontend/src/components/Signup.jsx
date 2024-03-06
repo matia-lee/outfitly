@@ -85,7 +85,7 @@ const Signup = () => {
       console.log("Signup data: ", signUpEmail, signUpPassword, signUpUsername);
 
       await signIn(signUpEmail, signUpPassword);
-      navigate("/");
+      navigate("/homepage");
     } catch (error) {
       console.log("Signup error: ", error.message);
     }
