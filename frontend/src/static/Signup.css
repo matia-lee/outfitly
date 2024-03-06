@@ -44,7 +44,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .create-username .profile-icon {
@@ -65,6 +65,46 @@ body {
   font-size: 16px;
   background-color: #eeeeee;
   color: #aaaaaa;
+}
+
+.create-username .invalid-username {
+  height: 43px;
+  width: 250px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #ffc9bb;
+  color: #aaaaaa;
+}
+
+.create-username .invalid-username-icon {
+  border: none;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc9bb;
+}
+
+.create-username .valid-username {
+  height: 43px;
+  width: 250px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #c1e2be;
+  color: #aaaaaa;
+}
+
+.create-username .valid-username-icon {
+  border: none;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c1e2be;
 }
 
 .enter-email {
@@ -94,6 +134,50 @@ body {
   font-size: 16px;
   background-color: #eeeeee;
   color: #aaaaaa;
+}
+
+.enter-email .invalid-email {
+  height: 43px;
+  width: 250px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #ffc9bb;
+  color: #aaaaaa;
+}
+
+.enter-email .invalid-email-icon {
+  border: none;
+  padding: 14.5px;
+  padding-left: 15.5px;
+  padding-right: 13.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc9bb;
+}
+
+.enter-email .valid-email {
+  height: 43px;
+  width: 250px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #c1e2be;
+  color: #aaaaaa;
+}
+
+.enter-email .valid-email-icon {
+  border: none;
+  padding: 14.5px;
+  padding-left: 15.5px;
+  padding-right: 13.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c1e2be;
 }
 
 .enter-password {
@@ -135,6 +219,70 @@ body {
   cursor: pointer;
 }
 
+.enter-password .invalid-password {
+  height: 43px;
+  width: 205px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #ffc9bb;
+  color: #aaaaaa;
+}
+
+.enter-password .invalid-password-visibility {
+  border: none;
+  padding: 13.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc9bb;
+  cursor: pointer;
+}
+
+.enter-password .invalid-password-icon {
+  border: none;
+  padding: 15.5px;
+  padding-left: 16.5px;
+  padding-right: 14.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc9bb;
+}
+
+.enter-password .valid-password {
+  height: 43px;
+  width: 205px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #c1e2be;
+  color: #aaaaaa;
+}
+
+.enter-password .valid-password-visibility {
+  border: none;
+  padding: 13.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c1e2be;
+  cursor: pointer;
+}
+
+.enter-password .valid-password-icon {
+  border: none;
+  padding: 15.5px;
+  padding-left: 16.5px;
+  padding-right: 14.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c1e2be;
+}
+
 .signup-button {
   color: white;
   padding: 0.7em 1.7em;
@@ -144,7 +292,7 @@ body {
   border: 1px solid #ff9999;
   transition: all 0.3s;
   box-shadow: 2px 2px 4px #ff6666, -4px -4px 8px #ffffff;
-  margin-top: 40px;
+  margin-top: 60px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 15px;
@@ -153,4 +301,33 @@ body {
 .signup-button:active {
   color: #eeeeee;
   box-shadow: inset 2px 2px 6px #ff6666, inset -1px -1px 8px #ffcccc;
+}
+
+.error-message {
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  margin-top: 390px;
+}
+
+.error-message h6 {
+  font-weight: 400;
+  font-size: 12px;
+  color: #ff4122;
+}
+
+.error-message-combined {
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  margin-top: 405px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message-combined p {
+  margin-bottom: -10px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ff4122;
 }
