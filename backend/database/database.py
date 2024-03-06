@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
-DATABASE_URI = f"mysql+pymysql://{os.environ.get('db_user')}:{os.environ.get('db_password')}@localhost/outfitly"
+DATABASE_URI = f"mysql+pymysql://{os.environ.get('db_user')}:{os.environ.get('db_password')}@{os.environ.get('db_host')}/outfitly"
 
 
 engine = create_engine(DATABASE_URI)
