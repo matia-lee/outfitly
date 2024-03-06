@@ -1,10 +1,19 @@
+import { useState } from "react";
 import "../static/Signup.css";
 import Hanger from "../icons/Hanger";
 import ProfileIcon from "../icons/ProfileIcon";
 import EmailIcon from "../icons/EmailIcon";
 import PasswordIcon from "../icons/PasswordIcon";
+import ShowPassword from "../icons/ShowPassword";
+import HidePassword from "../icons/HidePassword";
 
 const Signup = () => {
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
+
+  const handlePasswordVisibilityClick = () => {
+    setPasswordVisibility(!passwordVisibility);
+  };
+
   return (
     <div className="signup-container">
       <div className="icon">
@@ -34,9 +43,15 @@ const Signup = () => {
         </div>
         <input
           className="password-input"
-          type="password"
+          type= { passwordVisibility ? "password" : "text" }
           placeholder="Enter password"
         />
+        <div
+          className="password-visibility"
+          onClick={handlePasswordVisibilityClick}
+        >
+          {passwordVisibility ? <ShowPassword /> : <HidePassword />}
+        </div>
       </div>
       <button className="signup-button">Sign Up :)</button>
     </div>

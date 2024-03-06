@@ -1,7 +1,7 @@
 import "../static/Homepage.css";
 import { useNavigate } from "react-router-dom";
 
-const Homepage = () => {
+const WelcomePage = () => {
   const navigate = useNavigate();
 
   const handleSignupClick = () => {
@@ -24,4 +24,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default WelcomePage;
