@@ -10,6 +10,10 @@ const WelcomePage = () => {
     }, 150);
   };
 
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="main-container">
       <h1 className="title">Outfitly</h1>
@@ -18,7 +22,10 @@ const WelcomePage = () => {
         Signup to continue
       </button>
       <h4 className="login">
-        Already have an account? <span className="login-link">Log in</span>
+        Already have an account?{" "}
+        <span className="login-link" onClick={handleLoginClick}>
+          Log in
+        </span>
       </h4>
     </div>
   );
