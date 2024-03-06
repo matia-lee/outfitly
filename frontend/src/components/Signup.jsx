@@ -1,9 +1,9 @@
+import "../static/Signup.css";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import { useAuth } from "./AuthContext";
-import "../static/Signup.css";
 import Hanger from "../icons/Hanger";
 import ProfileIcon from "../icons/ProfileIcon";
 import EmailIcon from "../icons/EmailIcon";
