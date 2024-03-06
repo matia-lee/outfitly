@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
@@ -48,52 +48,66 @@ const Signup = () => {
     });
   };
 
-  useEffect(() => {
-    setRepeatedEmail(repeatedUsername);
-  }, [repeatedUsername]);
-
   const signup = async () => {
     setSubmissionAttempted(true);
-    const passwordIsValid = signUpPassword.length >= 6;
-    setValidPassword(passwordIsValid);
-    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpEmail);
-    setValidEmail(emailIsValid);
-    const usernameIsValid = signUpUsername.length > 0;
-    setValidUsername(usernameIsValid);
+    let isValid = true;
 
-    setRepeatedEmail(repeatedEmail);
-    setRepeatedUsername(repeatedUsername);
+    const passwordIsValid = signUpPassword.length >= 6;
+    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpEmail);
+    const usernameIsValid = signUpUsername.length > 0;
 
     if (!passwordIsValid || !emailIsValid || !usernameIsValid) {
-      return;
-    }
+      setValidPassword(passwordIsValid);
+      setValidEmail(emailIsValid);
+      setValidUsername(usernameIsValid);
+      isValid = false;
+    } else {
+      try {
+        const unique = await validateUniqueness(signUpEmail, signUpUsername);
+        if (!unique.ok) {
+          const dataError = await unique.json();
+          setSameEmailError("");
+          setSameUsernameError("");
+          setRepeatedEmail(true);
+          setRepeatedUsername(true);
 
-    try {
-      const unique = await validateUniqueness(signUpEmail, signUpUsername);
-      if (!unique.ok) {
-        const dataError = await unique.json();
-        if (dataError.message.includes("Email")) {
-          setSameEmailError(dataError.message);
-          setRepeatedEmail(!repeatedEmail);
-        } else if (dataError.message.includes("Username")) {
-          setSameUsernameError(dataError.message);
-          setRepeatedUsername(!repeatedUsername);
+          if (dataError.message.includes("Email")) {
+            setSameEmailError(dataError.message);
+            setRepeatedEmail(false);
+            isValid = false;
+          }
+          if (dataError.message.includes("Username")) {
+            setSameUsernameError(dataError.message);
+            setRepeatedUsername(false);
+            isValid = false;
+          }
+        } else {
+          setSameEmailError("");
+          setSameUsernameError("");
+          setRepeatedEmail(true);
+          setRepeatedUsername(true);
         }
-        return;
+      } catch (error) {
+        console.log("Error validating uniqueness", error);
+        isValid = false;
       }
-    } catch (error) {
-      console.log("Error validating uniqueness", error);
-      return;
     }
 
-    try {
-      await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword);
-      console.log("Signup data: ", signUpEmail, signUpPassword, signUpUsername);
+    if (isValid) {
+      try {
+        await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword);
+        console.log(
+          "Signup data: ",
+          signUpEmail,
+          signUpPassword,
+          signUpUsername
+        );
 
-      await signIn(signUpEmail, signUpPassword);
-      navigate("/homepage");
-    } catch (error) {
-      console.log("Signup error: ", error.message);
+        await signIn(signUpEmail, signUpPassword);
+        navigate("/homepage");
+      } catch (error) {
+        console.log("Signup error: ", error.message);
+      }
     }
   };
 
