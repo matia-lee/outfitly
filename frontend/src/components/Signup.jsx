@@ -24,12 +24,18 @@ const Signup = () => {
   const [sameEmailError, setSameEmailError] = useState("");
   const [sameUsernameError, setSameUsernameError] = useState("");
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
+  const [spin, setSpin] = useState(false);
   const { signIn } = useAuth();
 
   const navigate = useNavigate();
 
   const handlePasswordVisibilityClick = () => {
     setPasswordVisibility(!passwordVisibility);
+  };
+
+  const handleHangerClick = () => {
+    setSpin(true);
+    setTimeout(() => setSpin(false), 600);
   };
 
   const validateUniqueness = async (email, username) => {
@@ -93,8 +99,8 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <div className="icon">
-        <Hanger />
+      <div className="icon" onClick={handleHangerClick}>
+        <Hanger className={spin ? "spin-animation" : ""} />
       </div>
       <div className="title">Outfitly</div>
       <h6 className="subtitle">Create account</h6>
