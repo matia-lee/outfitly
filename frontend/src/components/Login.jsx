@@ -15,6 +15,7 @@ const Login = () => {
   const [spin, setSpin] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [validCredentials, setValidCredentials] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const { signIn } = useAuth();
 
@@ -36,6 +37,7 @@ const Login = () => {
       navigate("/homepage");
     } catch (error) {
       console.log("Login error: ", error.message);
+      setValidCredentials(false);
     }
   };
 
@@ -72,32 +74,37 @@ const Login = () => {
         <p>or</p>
       </div>
       <div className="enter-login-email">
-        <div className="email-icon">
+        <div className={`email-icon ${!validCredentials ? "invalid-email-icon" : ""}`}>
           <EmailIcon />
         </div>
         <input
-          className="email-input"
+          className={`email-input ${!validCredentials ? "invalid-email-input" : ""}`}
           type="email"
           placeholder="Enter email"
           onChange={(e) => setLoginEmail(e.target.value)}
         />
       </div>
       <div className="enter-password">
-        <div className="password-icon">
+        <div className={`password-icon ${!validCredentials ? "invalid-password-icon" : ""}`}>
           <PasswordIcon />
         </div>
         <input
-          className="password-input"
+          className={`password-input ${!validCredentials ? "invalid-password-input" : ""}`}
           type={passwordVisibility ? "password" : "text"}
           placeholder="Create password"
           onChange={(e) => setLoginPassword(e.target.value)}
         />
         <div
-          className="password-visibility"
+          className={`password-visibility ${!validCredentials ? "invalid-password-visibility" : ""}`}
           onClick={handlePasswordVisibilityClick}
         >
           {passwordVisibility ? <ShowPassword /> : <HidePassword />}
         </div>
+        {!validCredentials && (
+          <div className="invalid-credentials-message">
+            <p>Invalid username or password</p>
+          </div>
+        )}
       </div>
       <button className="login-button" onClick={login}>
         Login :)

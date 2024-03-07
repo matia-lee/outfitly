@@ -131,6 +131,17 @@ body {
   background-color: #eeeeee;
 }
 
+.enter-login-email .invalid-email-icon {
+  border: none;
+  padding: 14.5px;
+  padding-left: 15.5px;
+  padding-right: 13.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc9bb;
+}
+
 .enter-login-email .email-input {
   height: 43px;
   width: 250px;
@@ -142,16 +153,110 @@ body {
   color: #aaaaaa;
 }
 
+.enter-login-email .invalid-email-input {
+  height: 43px;
+  width: 250px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #ffc9bb;
+  color: #aaaaaa;
+}
+
+.enter-password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.enter-password .password-icon {
+  border: none;
+  padding: 15.5px;
+  padding-left: 16.5px;
+  padding-right: 14.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+}
+
+.enter-password .password-input {
+  height: 43px;
+  width: 205px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #eeeeee;
+  color: #aaaaaa;
+}
+
+.enter-password .password-visibility {
+  border: none;
+  padding: 13.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+.enter-password .invalid-password-input {
+  height: 43px;
+  width: 205px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #ffc9bb;
+  color: #aaaaaa;
+}
+
+.enter-password .invalid-password-visibility {
+  border: none;
+  padding: 13.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc9bb;
+  cursor: pointer;
+}
+
+.enter-password .invalid-password-icon {
+  border: none;
+  padding: 15.5px;
+  padding-left: 16.5px;
+  padding-right: 14.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc9bb;
+}
+
+.invalid-credentials-message {
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  margin-top: 75px;
+}
+
+.invalid-credentials-message p {
+  font-weight: 400;
+  font-size: 12px;
+  color: #ff4122;
+}
+
 .login-button {
   color: white;
-  padding: 0.7em 1.7em;
+  padding: 0.8em 2em;
   border-radius: 0.5em;
   background: #ff9999;
   cursor: pointer;
   border: 1px solid #ff9999;
   transition: all 0.3s;
   box-shadow: 2px 2px 4px #ff6666, -4px -4px 8px #ffffff;
-  margin-top: 30px;
+  margin-top: 45px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 15px;
