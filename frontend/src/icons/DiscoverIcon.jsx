@@ -1,4 +1,4 @@
-const DiscoverIcon = ({ className, style, size = "50px" }) => (
+const DiscoverIcon = ({ className, style, size = "40px" }) => (
   <svg
     className={className}
     style={{ width: size, height: size, ...style }}
@@ -9,7 +9,7 @@ const DiscoverIcon = ({ className, style, size = "50px" }) => (
     viewBox="0 0 512 512"
     xmlSpace="preserve"
   >
-    <style type="text/css">{`.st0{fill:#aaaaaa;}`}</style>
+    <style type="text/css">{`.st0{fill:#9b9b9b;}`}</style>
     <g>
       <path
         className="st0"

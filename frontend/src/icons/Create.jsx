@@ -1,4 +1,4 @@
-const Create = ({ className, style, size = "50px", color = "#aaaaaa" }) => (
+const Create = ({ className, style, size = "50px", color = "#9b9b9b" }) => (
   <svg
     className={className}
     style={style}

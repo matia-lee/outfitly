@@ -26,28 +26,88 @@ body {
   font-weight: 450;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+}
+
 .options {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 40px;
+  gap: 30px;
   width: 100%;
-  max-width: 148px;
+  max-width: 474px;
   margin: auto;
 }
 
+.options h3 {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  color: #bbbbbb;
+  font-weight: 500;
+  font-size: 13px;
+  margin-top: 50px;
+  margin-left: 1px;
+}
+
 .upload-icon {
-  border: solid 2px #000000;
+  border: dashed 4px #ffbbbb;
+  padding: 82px;
+  border-radius: 20px;
+  background-color: #ffeeee;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .create-icon {
-  border: solid 2px #000000;
+  border: solid 4px #ffbbbb;
+  padding: 82px;
+  border-radius: 20px;
+  background-color: #ffeeee;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .closet-icon {
-  border: solid 2px #000000;
+  border: solid 4px #ffbbbb;
+  padding: 87px;
+  border-radius: 20px;
+  background-color: #ffeeee;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .discover-icon {
-  border: solid 2px #000000;
+  border: solid 4px #ffbbbb;
+  padding: 87px;
+  border-radius: 20px;
+  background-color: #ffeeee;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-icon:hover,
+.create-icon:hover,
+.closet-icon:hover,
+.discover-icon:hover {
+  transform: scale(1.07);
 }

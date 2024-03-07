@@ -1,4 +1,4 @@
-const ClosetIcon = ({ className, style, size = "50px", color = "#aaaaaa" }) => (
+const ClosetIcon = ({ className, style, size = "40px", color = "#9b9b9b" }) => (
   <svg
     className={className}
     style={style}

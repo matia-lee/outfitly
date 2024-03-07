@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 import "../static/Homepage.css";
 import Hanger from "../icons/Hanger";
 import Upload from "../icons/Upload";
@@ -11,9 +12,27 @@ const Homepage = () => {
   const [spin, setSpin] = useState(false);
   const { username } = useAuth();
 
+  const navigate = useNavigate();
+
   const handleHangerClick = () => {
     setSpin(true);
     setTimeout(() => setSpin(false), 600);
+  };
+
+  const handleUploadClick = () => {
+    navigate("/upload");
+  };
+
+  const handleCreateClick = () => {
+    navigate("/create");
+  };
+
+  const handleClosetClick = () => {
+    navigate("/closet");
+  };
+
+  const handleDiscoverClick = () => {
+    navigate("/discover");
   };
 
   return (
@@ -24,11 +43,25 @@ const Homepage = () => {
         </div>
         <div className="username">{username}'s closet</div>
       </div>
-      <div className="options">
-        <Upload className="upload-icon"/>
-        <Create className="create-icon"/>
-        <ClosetIcon className="closet-icon"/>
-        <DiscoverIcon className="discover-icon"/>
+      <div className="container">
+        <div className="options">
+          <div className="upload-icon" onClick={handleUploadClick}>
+            <Upload />
+            <h3>Upload</h3>
+          </div>
+          <div className="create-icon" onClick={handleCreateClick}>
+            <Create />
+            <h3>Create</h3>
+          </div>
+          <div className="closet-icon" onClick={handleClosetClick}>
+            <ClosetIcon />
+            <h3>Closet</h3>
+          </div>
+          <div className="discover-icon" onClick={handleDiscoverClick}>
+            <DiscoverIcon />
+            <h3>Discover</h3>
+          </div>
+        </div>
       </div>
     </>
   );
