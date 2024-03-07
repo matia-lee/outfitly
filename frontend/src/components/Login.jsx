@@ -84,7 +84,7 @@ const Login = () => {
           onChange={(e) => setLoginEmail(e.target.value)}
         />
       </div>
-      <div className="enter-password">
+      <div className="enter-login-password">
         <div className={`password-icon ${!validCredentials ? "invalid-password-icon" : ""}`}>
           <PasswordIcon />
         </div>

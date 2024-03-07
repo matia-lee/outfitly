@@ -164,14 +164,14 @@ body {
   color: #aaaaaa;
 }
 
-.enter-password {
+.enter-login-password {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
 }
 
-.enter-password .password-icon {
+.enter-login-password .password-icon {
   border: none;
   padding: 15.5px;
   padding-left: 16.5px;
@@ -182,7 +182,7 @@ body {
   background-color: #eeeeee;
 }
 
-.enter-password .password-input {
+.enter-login-password .password-input {
   height: 43px;
   width: 205px;
   border: none;
@@ -193,7 +193,7 @@ body {
   color: #aaaaaa;
 }
 
-.enter-password .password-visibility {
+.enter-login-password .password-visibility {
   border: none;
   padding: 13.5px;
   display: flex;
@@ -203,7 +203,7 @@ body {
   cursor: pointer;
 }
 
-.enter-password .invalid-password-input {
+.enter-login-password .invalid-password-input {
   height: 43px;
   width: 205px;
   border: none;
@@ -214,7 +214,7 @@ body {
   color: #aaaaaa;
 }
 
-.enter-password .invalid-password-visibility {
+.enter-login-password .invalid-password-visibility {
   border: none;
   padding: 13.5px;
   display: flex;
@@ -224,7 +224,7 @@ body {
   cursor: pointer;
 }
 
-.enter-password .invalid-password-icon {
+.enter-login-password .invalid-password-icon {
   border: none;
   padding: 15.5px;
   padding-left: 16.5px;
