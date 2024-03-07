@@ -33,7 +33,7 @@ const Login = () => {
       console.log("Login data: ", loginEmail, loginPassword);
 
       await signIn(loginEmail, loginPassword);
-      navigate("/");
+      navigate("/homepage");
     } catch (error) {
       console.log("Login error: ", error.message);
     }

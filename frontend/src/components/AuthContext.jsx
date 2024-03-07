@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
         setUserEmail(user.email);
 
         try {
-          const response = await fetch(`http://localhost:5000/getUsername?email=${encodeURIComponent(user.email)}`);
+          const response = await fetch(`http://localhost:5000/get_username?email=${encodeURIComponent(user.email)}`);
           if (response.ok) {
             const data = await response.json();
             setUsername(data.message);
