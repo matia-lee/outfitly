@@ -54,7 +54,7 @@ body {
 }
 
 .upload-icon {
-  border: dashed 4px #ffbbbb;
+  border: solid 4px #ffbbbb;
   padding: 82px;
   border-radius: 20px;
   background-color: #ffeeee;
