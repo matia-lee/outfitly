@@ -40,3 +40,28 @@ body {
   margin-top: -7px;
   margin-left: 3px;
 }
+
+.upload-container {
+  border: dashed 4px #ffbbbb;
+  border-radius: 20px;
+  width: 700px;
+  height: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
+  background-color: white;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.instructions {
+  margin-top: -10px;
+}
+
+.instructions h3 {
+  font-family: "Roboto", sans-serif;
+  color: #808080;
+  font-weight: 600;
+}
