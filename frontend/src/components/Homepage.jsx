@@ -3,8 +3,8 @@ import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import "../static/Homepage.css";
 import Hanger from "../icons/Hanger";
-import Upload from "../icons/Upload";
-import Create from "../icons/Create";
+import UploadIcon from "../icons/UploadIcon";
+import CreateIcon from "../icons/CreateIcon";
 import ClosetIcon from "../icons/ClosetIcon";
 import DiscoverIcon from "../icons/DiscoverIcon";
 
@@ -46,11 +46,11 @@ const Homepage = () => {
       <div className="container">
         <div className="options">
           <div className="upload-icon" onClick={handleUploadClick}>
-            <Upload />
+            <UploadIcon />
             <h3>Upload</h3>
           </div>
           <div className="create-icon" onClick={handleCreateClick}>
-            <Create />
+            <CreateIcon />
             <h3>Create</h3>
           </div>
           <div className="closet-icon" onClick={handleClosetClick}>

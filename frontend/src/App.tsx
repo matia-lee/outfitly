@@ -4,6 +4,7 @@ import WelcomePage from "./components/WelcomePage";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Homepage from "./components/Homepage";
+import Upload from "./components/Upload";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/homepage" element={<Homepage />} />
+            <Route path="/upload" element={<Upload />} />
           </Routes>
         </div>
       </AuthProvider>

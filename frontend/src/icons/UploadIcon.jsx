@@ -1,4 +1,4 @@
-const Upload = ({ className, style, size = "50px" }) => (
+const UploadIcon = ({ className, style, size = "50px" }) => (
   <svg
     className={className}
     style={style}
@@ -17,4 +17,4 @@ const Upload = ({ className, style, size = "50px" }) => (
   </svg>
 );
 
-export default Upload;
+export default UploadIcon;

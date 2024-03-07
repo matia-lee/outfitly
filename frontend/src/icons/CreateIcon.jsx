@@ -1,4 +1,4 @@
-const Create = ({ className, style, size = "50px", color = "#9b9b9b" }) => (
+const CreateIcon = ({ className, style, size = "50px", color = "#9b9b9b" }) => (
   <svg
     className={className}
     style={style}
@@ -18,4 +18,4 @@ const Create = ({ className, style, size = "50px", color = "#9b9b9b" }) => (
   </svg>
 );
 
-export default Create;
+export default CreateIcon;
