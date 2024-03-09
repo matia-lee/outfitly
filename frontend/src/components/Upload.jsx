@@ -53,8 +53,7 @@ const Upload = () => {
       })
       .then((data) => {
         console.log("File uploaded successfully:", data);
-        // Assuming 'url' is the key in the response JSON that holds the image URL
-        setUploadedImageUrl(data.url); // Update the state with the URL of the uploaded image
+        setUploadedImageUrl(data.url); 
       })
       .catch((error) => {
         console.error("Error uploading file:", error);

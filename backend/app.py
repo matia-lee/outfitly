@@ -6,6 +6,7 @@ from scripts.get_username import get_username
 import boto3
 from werkzeug.utils import secure_filename
 from scripts.background_remover import remove_background_and_save
+from PIL import Image
 from database.models import ImageModel
 from database.database import db_session
 import os
@@ -42,15 +43,23 @@ def upload_file():
         
         file.save(input_path)
         
-        # Process the image
         remove_background_and_save(input_path, output_path)
+
+        with Image.open(output_path) as img:
+            # if img.mode != 'RGB':
+            #     img = img.convert('RGB')
+            img = img.resize((400, 320))
+            img = img.rotate(270)
+            img.save(output_path)
         
-        # Upload to AWS S3
-        s3.upload_file(output_path, BUCKET_NAME, 'path/in/bucket/' + filename)
+        try:
+            s3.upload_file(output_path, BUCKET_NAME, 'path/in/bucket/' + filename)
+        except Exception as e:
+            print(e)
+            return jsonify(error=str(e)), 500
         file_url = f"https://{BUCKET_NAME}.s3.amazonaws.com/path/in/bucket/{filename}"
 
-        # Save reference in MySQL
-        image_record = ImageModel(filename=filename, s3_path='path/in/bucket/' + filename)
+        image_record = ImageModel(filename=filename, s3_path='path/in/bucket/' + filename, file_url=file_url)
         db_session.add(image_record)
         db_session.commit()
 

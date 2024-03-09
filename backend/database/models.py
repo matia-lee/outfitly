@@ -14,3 +14,4 @@ class ImageModel(Base):
     id = Column(Integer, primary_key=True)
     filename = Column(String(255), nullable=False)
     s3_path = Column(String(255), nullable=False)
+    file_url = Column(String(255), nullable=False)
