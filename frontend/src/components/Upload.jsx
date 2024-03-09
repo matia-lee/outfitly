@@ -5,6 +5,9 @@ import UploadIcon from "../icons/UploadIcon";
 
 const Upload = () => {
   const [dragOver, setDragOver] = useState(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const fileInputRef = useRef(null);
 
   const handleBrowseFileClick = () => {
@@ -34,10 +37,11 @@ const Upload = () => {
 
   const handleFileUpload = (file) => {
     // console.log(file);
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("file", file);
 
-    fetch("/upload", {
+    fetch("http://localhost:5000/upload", {
       method: "POST",
       body: formData,
     })
@@ -49,8 +53,14 @@ const Upload = () => {
       })
       .then((data) => {
         console.log("File uploaded successfully:", data);
+        // Assuming 'url' is the key in the response JSON that holds the image URL
+        setUploadedImageUrl(data.url); // Update the state with the URL of the uploaded image
       })
-      .catch((error) => console.error("Error uploading file:", error));
+      .catch((error) => {
+        console.error("Error uploading file:", error);
+        // Handle failure
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -70,18 +80,33 @@ const Upload = () => {
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <UploadIcon size="80px" color="#ff9999" />
-        <div className="instructions">
-          <h3>Drag files to upload</h3>
-          <p>or</p>
-          <input type="file" style={{ display: "none" }} ref={fileInputRef} />
-          <button
-            className="browse-files-button"
-            onClick={handleBrowseFileClick}
-          >
-            Browse files
-          </button>
-        </div>
+        {isLoading ? (
+          <div className="loading-indicator">Uploading...</div> // Display a simple loading text or spinner
+        ) : (
+          <>
+            <UploadIcon size="80px" color="#ff9999" />
+            <div className="instructions">
+              <h3>Drag files to upload</h3>
+              <p>or</p>
+              <input
+                type="file"
+                style={{ display: "none" }}
+                ref={fileInputRef}
+              />
+              <button
+                className="browse-files-button"
+                onClick={handleBrowseFileClick}
+              >
+                Browse files
+              </button>
+            </div>
+          </>
+        )}
+        {uploadedImageUrl && (
+          <div className="image-preview">
+            <img src={uploadedImageUrl} alt="Uploaded" />
+          </div>
+        )}
       </div>
     </>
   );
