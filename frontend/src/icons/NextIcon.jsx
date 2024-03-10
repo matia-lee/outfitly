@@ -1,4 +1,4 @@
-const NextIcon = ({ width = "70px", height = "70px", className }) => (
+const NextIcon = ({ width = "70px", height = "70px", className, onClick }) => (
   <svg
     width={width}
     height={height}
@@ -6,6 +6,7 @@ const NextIcon = ({ width = "70px", height = "70px", className }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={`next-icon ${className}`}
+    onClick={onClick}
   >
     <path
       d="M6 12H18M18 12L13 7M18 12L13 17"

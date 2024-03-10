@@ -1,5 +1,7 @@
 import "../static/Upload.css";
 import { useCallback, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 import Hanger from "../icons/Hanger";
 import UploadIcon from "../icons/UploadIcon";
 import GarbageIcon from "../icons/GarbageIcon";
@@ -9,8 +11,11 @@ const Upload = () => {
   const [dragOver, setDragOver] = useState(false);
   const [confirmUploadedImage, setConfirmUploadedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { username } = useAuth();
 
   const fileInputRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const handleBrowseFileClick = () => {
     setTimeout(() => {
@@ -43,7 +48,7 @@ const Upload = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    fetch("http://localhost:5000/upload", {
+    fetch("http://localhost:5000/temporary_upload", {
       method: "POST",
       body: formData,
     })
@@ -61,6 +66,28 @@ const Upload = () => {
         console.error("Error uploading file:", error);
       })
       .finally(() => setIsLoading(false));
+  };
+
+  const commitUpload = (url) => {
+    console.log("commitUpload called with URL:", url);
+
+    console.log("Sending to backend:", { url, username });
+
+    fetch("http://localhost:5000/commit_upload", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url, username }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Committed successfully", data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error committing upload", error);
+      });
   };
 
   const handleFileSelection = (e) => {
@@ -123,7 +150,7 @@ const Upload = () => {
                 </span>
               </div>
               <div className="next-icon-text">
-                <NextIcon className="next-icon" />
+                <NextIcon className="next-icon" onClick={() => commitUpload(confirmUploadedImage)} />
                 <span className="continue-hover-text">
                   <p>Continue</p>
                 </span>

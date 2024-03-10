@@ -24,13 +24,15 @@ app.add_url_rule('/signup', view_func=signup, methods=['POST'])
 #for grabbing username for authcontext
 app.add_url_rule('/get_username', view_func=get_username, methods=['GET'])
 
-
-#for removing background and saving to aws
 s3 = boto3.client('s3', aws_access_key_id=os.getenv('aws_access_key_id'), aws_secret_access_key=os.getenv('aws_secret_access_key'), region_name=os.getenv('region_name'))
 BUCKET_NAME = 'outfitly'
 
-@app.route('/upload', methods=['POST'])
+temp_file_paths = {}
+
+@app.route('/temporary_upload', methods=['POST'])
 def upload_file():
+    global temp_file_paths 
+
     if 'file' not in request.files:
         return jsonify(error="No file part"), 400
     file = request.files['file']
@@ -38,35 +40,60 @@ def upload_file():
         return jsonify(error="No selected file"), 400
     if file:
         filename = secure_filename(file.filename)
-        input_path = os.path.join('/tmp', filename)
-        output_path = os.path.join('/tmp', 'processed_' + filename)
+        temp_input_path = os.path.join('/tmp', filename)
+        processed_file_path = os.path.join('/tmp', 'processed_' + filename)  
         
-        file.save(input_path)
+        file.save(temp_input_path)
         
-        remove_background_and_save(input_path, output_path)
+        remove_background_and_save(temp_input_path, processed_file_path)
 
-        with Image.open(output_path) as img:
-            # if img.mode != 'RGB':
-            #     img = img.convert('RGB')
+        with Image.open(processed_file_path) as img:
             img = img.resize((400, 320))
             img = img.rotate(270)
-            img.save(output_path)
-        
+            img.save(processed_file_path)
+
+        temp_file_paths[filename] = {
+            'path': processed_file_path,
+            'temp_input_path': temp_input_path
+        }
+
         try:
-            s3.upload_file(output_path, BUCKET_NAME, 'path/in/bucket/' + filename)
+            s3.upload_file(processed_file_path, BUCKET_NAME, 'path/in/bucket/' + filename)
         except Exception as e:
             print(e)
             return jsonify(error=str(e)), 500
         file_url = f"https://{BUCKET_NAME}.s3.amazonaws.com/path/in/bucket/{filename}"
 
-        image_record = ImageModel(filename=filename, s3_path='path/in/bucket/' + filename, file_url=file_url)
+        return jsonify({
+            'message': 'File uploaded successfully, awaiting confirmation',
+            'tempId': filename,
+            'url': file_url
+        }), 200
+
+@app.route('/commit_upload', methods=['POST'])
+def commit_upload():
+    data = request.get_json()
+    url = data.get('url')
+    username = data.get('username')
+
+    if not url or not username:
+        return jsonify(error="Missing data"), 400
+
+    try:
+        image_record = ImageModel(username=username, file_url=url)
         db_session.add(image_record)
         db_session.commit()
+    except Exception as e:
+        db_session.rollback() 
+        print(e)
+        return jsonify(error="Error saving to database"), 500
 
-        # return jsonify(message="File uploaded and processed successfully", filename=filename), 200
-        return jsonify(message="File uploaded and processed successfully", filename=filename, url=file_url), 200
+    return jsonify(message="Upload committed successfully", url=url), 200
 
-        
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
