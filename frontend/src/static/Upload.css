@@ -132,3 +132,63 @@ body {
   background-color: #ffcccc;
   border: solid 2px #ffcccc;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 1; */
+}
+
+.image-preview {
+  background-color: white;
+  width: 450px;
+  height: 550px;
+  margin: auto;
+  /* z-index: 2; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.image-preview img {
+  margin-top: -50px;
+}
+
+.garbage-icon,
+.next-icon {
+  position: absolute;
+  bottom: 20px;
+  cursor: pointer;
+}
+
+.garbage-icon {
+  transition: transform 0.2s ease;
+  left: 30px;
+  color: #9b9b9b;
+}
+
+.garbage-icon:hover {
+  transform: scale(1.2);
+  color: #ff9999;
+}
+
+.next-icon {
+  transition: transform 0.2s ease;
+  right: 30px;
+  color: #9b9b9b;
+}
+
+.next-icon:hover {
+  transform: scale(1.2);
+  color: #a9daad;
+}

@@ -2,10 +2,12 @@ import "../static/Upload.css";
 import { useCallback, useState, useRef } from "react";
 import Hanger from "../icons/Hanger";
 import UploadIcon from "../icons/UploadIcon";
+import GarbageIcon from "../icons/GarbageIcon";
+import NextIcon from "../icons/NextIcon";
 
 const Upload = () => {
   const [dragOver, setDragOver] = useState(false);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [confirmUploadedImage, setConfirmUploadedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const fileInputRef = useRef(null);
@@ -53,13 +55,19 @@ const Upload = () => {
       })
       .then((data) => {
         console.log("File uploaded successfully:", data);
-        setUploadedImageUrl(data.url); 
+        setConfirmUploadedImage(data.url);
       })
       .catch((error) => {
         console.error("Error uploading file:", error);
-        // Handle failure
       })
       .finally(() => setIsLoading(false));
+  };
+
+  const handleFileSelection = (e) => {
+    const files = e.target.files;
+    if (files.length) {
+      handleFileUpload(files[0]);
+    }
   };
 
   return (
@@ -91,6 +99,7 @@ const Upload = () => {
                 type="file"
                 style={{ display: "none" }}
                 ref={fileInputRef}
+                onChange={handleFileSelection}
               />
               <button
                 className="browse-files-button"
@@ -101,12 +110,18 @@ const Upload = () => {
             </div>
           </>
         )}
-        {uploadedImageUrl && (
-          <div className="image-preview">
-            <img src={uploadedImageUrl} alt="Uploaded" />
-          </div>
-        )}
       </div>
+      {confirmUploadedImage && (
+        <>
+          <div className="overlay">
+            <div className="image-preview">
+              <img src={confirmUploadedImage} alt="Uploaded" />
+              <GarbageIcon className="garbage-icon" />
+              <NextIcon className="next-icon" />
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
