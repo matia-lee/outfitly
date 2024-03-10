@@ -1,15 +1,15 @@
-const GarbageIcon = ({ width = "40px", height = "40px", className }) => (
+const GarbageIcon = ({ width = "50px", height = "50px", className }) => (
   <svg
     width={width}
     height={height}
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={`garbage-icon ${className}`} // Add a base class for targeting with CSS
+    className={`garbage-icon ${className}`}
   >
     <path
       d="M20.5001 6H3.5"
-      stroke="currentColor" // Use currentColor
+      stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
     />

@@ -116,8 +116,18 @@ const Upload = () => {
           <div className="overlay">
             <div className="image-preview">
               <img src={confirmUploadedImage} alt="Uploaded" />
-              <GarbageIcon className="garbage-icon" />
-              <NextIcon className="next-icon" />
+              <div className="garbage-icon-text">
+                <GarbageIcon className="garbage-icon" />
+                <span className="discard-hover-text">
+                  <p>Discard</p>
+                </span>
+              </div>
+              <div className="next-icon-text">
+                <NextIcon className="next-icon" />
+                <span className="continue-hover-text">
+                  <p>Continue</p>
+                </span>
+              </div>
             </div>
           </div>
         </>

@@ -164,10 +164,16 @@ body {
   margin-top: -50px;
 }
 
-.garbage-icon,
-.next-icon {
+.garbage-icon {
   position: absolute;
   bottom: 20px;
+  cursor: pointer;
+}
+
+.next-icon {
+  position: absolute;
+  bottom: 10px;
+  left: 365px;
   cursor: pointer;
 }
 
@@ -191,4 +197,66 @@ body {
 .next-icon:hover {
   transform: scale(1.2);
   color: #a9daad;
+}
+
+.discard-hover-text {
+  visibility: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, visibility 0.3s ease;
+  position: absolute;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-left: -200px;
+  margin-top: 20px;
+}
+
+.discard-hover-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #f2f2f2 transparent transparent transparent;
+}
+
+.continue-hover-text {
+  visibility: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, visibility 0.3s ease;
+  position: absolute;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-left: 140px;
+  margin-top: 25px;
+}
+
+.continue-hover-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #f2f2f2 transparent transparent transparent;
+}
+
+.discard-hover-text p,
+.continue-hover-text p {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  margin: 0;
+  color: #aaaaaa;
+}
+
+.garbage-icon-text:hover .discard-hover-text,
+.next-icon-text:hover .continue-hover-text {
+  visibility: visible;
+  opacity: 1;
 }
