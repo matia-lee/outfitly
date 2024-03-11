@@ -1,6 +1,6 @@
 const CompleteIcon = ({
-  width = "45px",
-  height = "45px",
+  width = "40px",
+  height = "40px",
   className,
   color = "currentColor",
   onClick,

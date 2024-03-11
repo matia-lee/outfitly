@@ -14,3 +14,4 @@ class ImageModel(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(80), nullable=False)
     file_url = Column(String(255), nullable=False)
+    interaction = Column(String(80), nullable=True)

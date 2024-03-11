@@ -17,6 +17,7 @@ const Upload = () => {
   const [confirmUploadedImage, setConfirmUploadedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [continuePage, setContinuePage] = useState(false);
+  const [interaction, setInteraction] = useState("");
   const { username } = useAuth();
 
   const fileInputRef = useRef(null);
@@ -111,6 +112,32 @@ const Upload = () => {
     navigate("/create");
   };
 
+  const updateInteraction = (newInteraction) => {
+    const updatedInteraction =
+      interaction === newInteraction ? "" : newInteraction;
+    setInteraction(updatedInteraction);
+
+    // Send updated interaction to the backend
+    fetch("http://localhost:5000/update_interaction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url: confirmUploadedImage,
+        username,
+        interaction: updatedInteraction,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Interaction updated successfully", data);
+      })
+      .catch((error) => {
+        console.error("Error updating interaction", error);
+      });
+  };
+
   return (
     <>
       <div className="navbar">
@@ -154,7 +181,7 @@ const Upload = () => {
       </div>
       {confirmUploadedImage && (
         <>
-          <div className="complete-overlay">
+          <div className="overlay">
             <div className="image-preview">
               <p className="verify-text">Verify</p>
               <img src={confirmUploadedImage} alt="Uploaded" />
@@ -182,30 +209,61 @@ const Upload = () => {
       )}
       {continuePage && (
         <>
-          <div className="overlay">
+          <div className="complete-overlay">
             <div className="continue-page-image">
               <p className="container-label">Tag image</p>
               <img src={confirmUploadedImage} alt="Uploaded" />
               <div className="tagging-options">
                 <div className="headwear">
-                  <HatIcon className="hat-icon" />
+                  <HatIcon
+                    onClick={() => updateInteraction("headwear")}
+                    className={`hat-icon ${
+                      interaction === "headwear" ? "selected" : ""
+                    }`}
+                    color={interaction === "headwear" ? "#ff9999" : "#9b9b9b"}
+                  />
                   <p>Headwear</p>
                 </div>
                 <div className="top">
-                  <ShirtIcon className="shirt-icon" />
+                  <ShirtIcon
+                    onClick={() => updateInteraction("top")}
+                    className={`shirt-icon ${
+                      interaction === "top" ? "selected" : ""
+                    }`}
+                    strokeColor={interaction === "top" ? "#ff9999" : "#9b9b9b"}
+                  />
                   <p>Top</p>
                 </div>
                 <div className="bottom">
-                  <PantsIcon className="pants-icon" />
+                  <PantsIcon
+                    onClick={() => updateInteraction("bottom")}
+                    className={`pants-icon ${
+                      interaction === "bottom" ? "selected" : ""
+                    }`}
+                    strokeColor={
+                      interaction === "bottom" ? "#ff9999" : "#9b9b9b"
+                    }
+                  />
                   <p>Bottom</p>
                 </div>
                 <div className="footwear">
-                  <ShoeIcon className="shoe-icon" />
+                  <ShoeIcon
+                    onClick={() => updateInteraction("footwear")}
+                    className={`shoe-icon ${
+                      interaction === "footwear" ? "selected" : ""
+                    }`}
+                    strokeColor={
+                      interaction === "footwear" ? "#ff9999" : "#9b9b9b"
+                    }
+                  />
                   <p>Footwear</p>
                 </div>
               </div>
               <div className="complete-icon-text">
-                <CompleteIcon className="complete-icon" onClick={handleCompleteClick}/>
+                <CompleteIcon
+                  className="complete-icon"
+                  onClick={handleCompleteClick}
+                />
                 <span className="complete-hover-text">
                   <p>Complete</p>
                 </span>
