@@ -119,26 +119,7 @@ const Upload = () => {
     const updatedInteraction =
       interaction === newInteraction ? "" : newInteraction;
     setInteraction(updatedInteraction);
-
-    fetch("http://localhost:5000/update_interaction", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        url: confirmUploadedImage,
-        username,
-        interaction: updatedInteraction,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Interaction updated successfully", data);
-        setUploadError(false);
-      })
-      .catch((error) => {
-        console.error("Error updating interaction", error);
-      });
+    setUploadError(false);
   };
 
   return (
@@ -201,7 +182,7 @@ const Upload = () => {
                     className={`hat-icon ${
                       interaction === "headwear" ? "selected" : ""
                     }`}
-                    color={interaction === "headwear" ? "#ff9999" : "#9b9b9b"}
+                    color={interaction === "headwear" ? "#ff9999" : "#aaaaaa"}
                   />
                   <p>Headwear</p>
                 </div>
@@ -213,7 +194,7 @@ const Upload = () => {
                     className={`shirt-icon ${
                       interaction === "top" ? "selected" : ""
                     }`}
-                    strokeColor={interaction === "top" ? "#ff9999" : "#9b9b9b"}
+                    strokeColor={interaction === "top" ? "#ff9999" : "#aaaaaa"}
                   />
                   <p>Top</p>
                 </div>
@@ -228,7 +209,7 @@ const Upload = () => {
                       interaction === "bottom" ? "selected" : ""
                     }`}
                     strokeColor={
-                      interaction === "bottom" ? "#ff9999" : "#9b9b9b"
+                      interaction === "bottom" ? "#ff9999" : "#aaaaaa"
                     }
                   />
                   <p>Bottom</p>
@@ -244,7 +225,7 @@ const Upload = () => {
                       interaction === "footwear" ? "selected" : ""
                     }`}
                     strokeColor={
-                      interaction === "footwear" ? "#ff9999" : "#9b9b9b"
+                      interaction === "footwear" ? "#ff9999" : "#aaaaaa"
                     }
                   />
                   <p>Footwear</p>

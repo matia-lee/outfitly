@@ -294,7 +294,7 @@ body {
   cursor: pointer;
   transition: transform 0.2s ease;
   left: 10px;
-  color: #bbbbbb;
+  color: #cccccc;
 }
 
 .garbage-icon:hover {
@@ -305,11 +305,11 @@ body {
 .complete-icon {
   position: absolute;
   bottom: 10px;
-  left: 375px;
+  left: 378px;
   cursor: pointer;
   transition: transform 0.2s ease;
   right: 30px;
-  color: #bbbbbb;
+  color: #cccccc;
 }
 
 .complete-icon:hover {

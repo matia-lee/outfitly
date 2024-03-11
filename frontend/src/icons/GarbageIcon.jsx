@@ -1,4 +1,9 @@
-const GarbageIcon = ({ width = "40px", height = "40px", className, onClick }) => (
+const GarbageIcon = ({
+  width = "35px",
+  height = "35px",
+  className,
+  onClick,
+}) => (
   <svg
     width={width}
     height={height}

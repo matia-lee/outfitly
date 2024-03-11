@@ -99,18 +99,6 @@ def commit_upload():
 
     return jsonify(message="Upload committed successfully", url=url, interaction=interaction), 200
 
-@app.route('/update_interaction', methods=['POST'])
-def update_interaction():
-    data = request.json
-    image = db_session.query(ImageModel).filter_by(username=data['username'], file_url=data['url']).first()
-
-    if image:
-        image.interaction = data['interaction']
-        db_session.commit()
-        return jsonify({"message": "Interaction updated successfully"}), 200
-    else:
-        return jsonify({"error": "Image not found"}), 404
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
