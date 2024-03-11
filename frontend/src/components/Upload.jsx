@@ -17,6 +17,7 @@ const Upload = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [interaction, setInteraction] = useState("");
   const [uploadError, setUploadError] = useState(false);
+  const [fileTypeError, setFileTypeError] = useState(false);
   const { username } = useAuth();
 
   const fileInputRef = useRef(null);
@@ -49,7 +50,10 @@ const Upload = () => {
   }, []);
 
   const handleFileUpload = (file) => {
-    // console.log(file);
+    if (file.type !== "image/png") {
+      setFileTypeError(true);
+      return;
+    }
     setIsLoading(true);
     const formData = new FormData();
     formData.append("file", file);
@@ -252,6 +256,14 @@ const Upload = () => {
             </div>
           </div>
         </>
+      )}
+      {fileTypeError && (
+        <div>
+          <div>hello</div>
+          <div onClick={() => setFileTypeError(false)}>
+            Uh oh.. peepeepoopoo
+          </div>
+        </div>
       )}
     </>
   );

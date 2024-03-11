@@ -4,6 +4,7 @@ from database.database import init_db
 from scripts.signup import signup
 from scripts.get_username import get_username
 import boto3
+from uuid import uuid4
 from werkzeug.utils import secure_filename
 from scripts.background_remover import remove_background_and_save
 from PIL import Image
@@ -38,8 +39,12 @@ def upload_file():
     file = request.files['file']
     if file.filename == '':
         return jsonify(error="No selected file"), 400
+    if file.content_type != 'image/png':
+        return jsonify(error="Only png allowed"), 400
     if file:
-        filename = secure_filename(file.filename)
+        original_filename = secure_filename(file.filename)
+        unique_id = uuid4().hex
+        filename = f"{unique_id}_{original_filename}"
         temp_input_path = os.path.join('/tmp', filename)
         processed_file_path = os.path.join('/tmp', 'processed_' + filename)  
         
