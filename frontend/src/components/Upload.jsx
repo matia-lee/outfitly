@@ -9,6 +9,7 @@ import HatIcon from "../icons/HatIcon";
 import ShirtIcon from "../icons/ShirtIcon";
 import PantsIcon from "../icons/PantsIcon";
 import ShoeIcon from "../icons/ShoeIcon";
+import CompleteIcon from "../icons/CompleteIcon";
 
 const Upload = () => {
   const [dragOver, setDragOver] = useState(false);
@@ -148,7 +149,7 @@ const Upload = () => {
         <>
           <div className="overlay">
             <div className="image-preview">
-              <p>Verify</p>
+              <p className="verify-text">Verify</p>
               <img src={confirmUploadedImage} alt="Uploaded" />
               <div className="garbage-icon-text">
                 <GarbageIcon
@@ -176,6 +177,7 @@ const Upload = () => {
         <>
           <div className="overlay">
             <div className="continue-page-image">
+              <p className="container-label">Tag image</p>
               <img src={confirmUploadedImage} alt="Uploaded" />
               <div className="tagging-options">
                 <div className="headwear">
@@ -194,6 +196,14 @@ const Upload = () => {
                   <ShoeIcon className="shoe-icon" />
                   <p>Footwear</p>
                 </div>
+              </div>
+              <div className="complete-icon-text">
+                <CompleteIcon
+                  className="complete-icon"
+                />
+                <span className="complete-hover-text">
+                  <p>Complete</p>
+                </span>
               </div>
             </div>
           </div>

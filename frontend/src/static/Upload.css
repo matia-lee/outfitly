@@ -160,12 +160,13 @@ body {
   position: relative;
 }
 
-.image-preview p {
+.image-preview .verify-text {
   position: absolute;
   font-family: "Roboto", sans-serif;
-  color: #9b9b9b;
+  color: #8c8c8c;
   margin-top: -450px;
   font-weight: 400;
+  text-decoration: underline;
 }
 
 .image-preview img {
@@ -176,6 +177,9 @@ body {
   position: absolute;
   bottom: 20px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+  left: 30px;
+  color: #9b9b9b;
 }
 
 .next-icon {
@@ -183,23 +187,14 @@ body {
   bottom: 10px;
   left: 350px;
   cursor: pointer;
-}
-
-.garbage-icon {
   transition: transform 0.2s ease;
-  left: 30px;
+  right: 30px;
   color: #9b9b9b;
 }
 
 .garbage-icon:hover {
   transform: scale(1.2);
   color: #ff9999;
-}
-
-.next-icon {
-  transition: transform 0.2s ease;
-  right: 30px;
-  color: #9b9b9b;
 }
 
 .next-icon:hover {
@@ -217,7 +212,7 @@ body {
   background-color: #f2f2f2;
   border-radius: 5px;
   margin-left: -191.5px;
-  margin-top: 2px;
+  margin-top: -13px;
   width: 30px;
   display: flex;
   justify-content: center;
@@ -249,15 +244,11 @@ body {
   background-color: #f2f2f2;
   border-radius: 5px;
   margin-left: 135px;
-  margin-top: 5px;
+  margin-top: -10px;
   width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.continue-hover-text p {
-  font-size: 12px;
 }
 
 .continue-hover-text::after {
@@ -296,6 +287,10 @@ body {
   flex-direction: column;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+
+.continue-page-image img {
+  margin-top: 0px;
 }
 
 .tagging-options {
@@ -339,4 +334,71 @@ body {
   margin-top: 11px;
   margin-bottom: 11px;
   color: #aaaaaa;
+}
+
+.continue-page-image .container-label {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  color: #8c8c8c;
+  margin-top: -450px;
+  font-weight: 400;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+.complete-icon {
+  position: absolute;
+  bottom: 10px;
+  left: 365px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  right: 30px;
+  color: #9b9b9b;
+}
+
+.complete-icon:hover {
+  transform: scale(1.2);
+  color: #a9daad;
+}
+
+.complete-hover-text {
+  visibility: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, visibility 0.3s ease;
+  position: absolute;
+  padding: 12px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-left: 145px;
+  margin-top: -40px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.complete-hover-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #f2f2f2 transparent transparent transparent;
+}
+
+.complete-hover-text p {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  margin: 0;
+  color: #aaaaaa;
+}
+
+.complete-icon-text:hover .complete-hover-text {
+  visibility: visible;
+  opacity: 1;
 }
