@@ -1,21 +1,23 @@
 import "../static/Upload.css";
 import { useCallback, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Hanger from "../icons/Hanger";
 import UploadIcon from "../icons/UploadIcon";
 import GarbageIcon from "../icons/GarbageIcon";
 import NextIcon from "../icons/NextIcon";
+import HatIcon from "../icons/HatIcon";
+import ShirtIcon from "../icons/ShirtIcon";
+import PantsIcon from "../icons/PantsIcon";
+import ShoeIcon from "../icons/ShoeIcon";
 
 const Upload = () => {
   const [dragOver, setDragOver] = useState(false);
   const [confirmUploadedImage, setConfirmUploadedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [continuePage, setContinuePage] = useState(false);
   const { username } = useAuth();
 
   const fileInputRef = useRef(null);
-
-  const navigate = useNavigate();
 
   const handleBrowseFileClick = () => {
     setTimeout(() => {
@@ -83,11 +85,15 @@ const Upload = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Committed successfully", data);
-        navigate("/");
+        setContinuePage(true);
       })
       .catch((error) => {
         console.error("Error committing upload", error);
       });
+  };
+
+  const handleDiscardClick = () => {
+    setConfirmUploadedImage("");
   };
 
   const handleFileSelection = (e) => {
@@ -142,18 +148,52 @@ const Upload = () => {
         <>
           <div className="overlay">
             <div className="image-preview">
+              <p>Verify</p>
               <img src={confirmUploadedImage} alt="Uploaded" />
               <div className="garbage-icon-text">
-                <GarbageIcon className="garbage-icon" />
+                <GarbageIcon
+                  className="garbage-icon"
+                  onClick={handleDiscardClick}
+                />
                 <span className="discard-hover-text">
                   <p>Discard</p>
                 </span>
               </div>
               <div className="next-icon-text">
-                <NextIcon className="next-icon" onClick={() => commitUpload(confirmUploadedImage)} />
+                <NextIcon
+                  className="next-icon"
+                  onClick={() => commitUpload(confirmUploadedImage)}
+                />
                 <span className="continue-hover-text">
                   <p>Continue</p>
                 </span>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {continuePage && (
+        <>
+          <div className="overlay">
+            <div className="continue-page-image">
+              <img src={confirmUploadedImage} alt="Uploaded" />
+              <div className="tagging-options">
+                <div className="headwear">
+                  <HatIcon className="hat-icon" />
+                  <p>Headwear</p>
+                </div>
+                <div className="top">
+                  <ShirtIcon className="shirt-icon" />
+                  <p>Top</p>
+                </div>
+                <div className="bottom">
+                  <PantsIcon className="pants-icon" />
+                  <p>Bottom</p>
+                </div>
+                <div className="footwear">
+                  <ShoeIcon className="shoe-icon" />
+                  <p>Footwear</p>
+                </div>
               </div>
             </div>
           </div>

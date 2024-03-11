@@ -148,8 +148,8 @@ body {
 
 .image-preview {
   background-color: white;
-  width: 450px;
-  height: 550px;
+  width: 425px;
+  height: 525px;
   margin: auto;
   /* z-index: 2; */
   display: flex;
@@ -160,8 +160,16 @@ body {
   position: relative;
 }
 
+.image-preview p {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  color: #9b9b9b;
+  margin-top: -450px;
+  font-weight: 400;
+}
+
 .image-preview img {
-  margin-top: -50px;
+  margin-top: 0px;
 }
 
 .garbage-icon {
@@ -173,7 +181,7 @@ body {
 .next-icon {
   position: absolute;
   bottom: 10px;
-  left: 365px;
+  left: 350px;
   cursor: pointer;
 }
 
@@ -205,11 +213,19 @@ body {
   white-space: nowrap;
   transition: opacity 0.2s ease, visibility 0.3s ease;
   position: absolute;
-  padding: 10px;
+  padding: 15px;
   background-color: #f2f2f2;
   border-radius: 5px;
-  margin-left: -200px;
-  margin-top: 20px;
+  margin-left: -191.5px;
+  margin-top: 2px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.discard-hover-text p {
+  font-size: 12px;
 }
 
 .discard-hover-text::after {
@@ -229,11 +245,19 @@ body {
   white-space: nowrap;
   transition: opacity 0.2s ease, visibility 0.3s ease;
   position: absolute;
-  padding: 10px;
+  padding: 15px;
   background-color: #f2f2f2;
   border-radius: 5px;
-  margin-left: 140px;
-  margin-top: 25px;
+  margin-left: 135px;
+  margin-top: 5px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.continue-hover-text p {
+  font-size: 12px;
 }
 
 .continue-hover-text::after {
@@ -259,4 +283,60 @@ body {
 .next-icon-text:hover .continue-hover-text {
   visibility: visible;
   opacity: 1;
+}
+
+.continue-page-image {
+  background-color: white;
+  width: 425px;
+  height: 525px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.tagging-options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 310px;
+}
+
+.tagging-options > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.headwear p {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.top p {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.bottom p {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  color: #aaaaaa;
+}
+
+.footwear p {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  color: #aaaaaa;
 }

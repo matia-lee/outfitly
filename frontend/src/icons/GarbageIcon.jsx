@@ -1,4 +1,4 @@
-const GarbageIcon = ({ width = "50px", height = "50px", className }) => (
+const GarbageIcon = ({ width = "40px", height = "40px", className, onClick }) => (
   <svg
     width={width}
     height={height}
@@ -6,6 +6,7 @@ const GarbageIcon = ({ width = "50px", height = "50px", className }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={`garbage-icon ${className}`}
+    onClick={onClick}
   >
     <path
       d="M20.5001 6H3.5"

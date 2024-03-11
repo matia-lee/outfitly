@@ -78,7 +78,11 @@ def commit_upload():
 
     if not url or not username:
         return jsonify(error="Missing data"), 400
-
+    
+    # existing_record = db_session.query(ImageModel).filter_by(username=username, file_url=url).first()
+    # if existing_record:
+    #     return jsonify(message="Exists"), 409
+    
     try:
         image_record = ImageModel(username=username, file_url=url)
         db_session.add(image_record)

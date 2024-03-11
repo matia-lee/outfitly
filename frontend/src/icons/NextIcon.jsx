@@ -1,4 +1,4 @@
-const NextIcon = ({ width = "70px", height = "70px", className, onClick }) => (
+const NextIcon = ({ width = "60px", height = "60px", className, onClick }) => (
   <svg
     width={width}
     height={height}

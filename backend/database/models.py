@@ -12,5 +12,5 @@ class User(Base):
 class ImageModel(Base):
     __tablename__ = 'images'
     id = Column(Integer, primary_key=True)
-    username = Column(String(80), unique=True, nullable=False)
+    username = Column(String(80), nullable=False)
     file_url = Column(String(255), nullable=False)
