@@ -5,7 +5,6 @@ import { useAuth } from "./AuthContext";
 import Hanger from "../icons/Hanger";
 import UploadIcon from "../icons/UploadIcon";
 import GarbageIcon from "../icons/GarbageIcon";
-import NextIcon from "../icons/NextIcon";
 import HatIcon from "../icons/HatIcon";
 import ShirtIcon from "../icons/ShirtIcon";
 import PantsIcon from "../icons/PantsIcon";
@@ -16,7 +15,6 @@ const Upload = () => {
   const [dragOver, setDragOver] = useState(false);
   const [confirmUploadedImage, setConfirmUploadedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [continuePage, setContinuePage] = useState(false);
   const [interaction, setInteraction] = useState("");
   const { username } = useAuth();
 
@@ -90,7 +88,7 @@ const Upload = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Committed successfully", data);
-        setContinuePage(true);
+        navigate("/create");
       })
       .catch((error) => {
         console.error("Error committing upload", error);
@@ -108,16 +106,11 @@ const Upload = () => {
     }
   };
 
-  const handleCompleteClick = () => {
-    navigate("/create");
-  };
-
   const updateInteraction = (newInteraction) => {
     const updatedInteraction =
       interaction === newInteraction ? "" : newInteraction;
     setInteraction(updatedInteraction);
 
-    // Send updated interaction to the backend
     fetch("http://localhost:5000/update_interaction", {
       method: "POST",
       headers: {
@@ -183,40 +176,16 @@ const Upload = () => {
       </div>
       {confirmUploadedImage && (
         <>
-          <div className="overlay">
-            <div className="image-preview">
-              {/* <p className="verify-text">Verify</p> */}
-              <img src={confirmUploadedImage} alt="Uploaded" />
-              <div className="garbage-icon-text">
-                <GarbageIcon
-                  className="garbage-icon"
-                  onClick={handleDiscardClick}
-                />
-                <span className="discard-hover-text">
-                  <p>Discard</p>
-                </span>
-              </div>
-              <div className="next-icon-text">
-                <NextIcon
-                  className="next-icon"
-                  onClick={() => commitUpload(confirmUploadedImage)}
-                />
-                <span className="continue-hover-text">
-                  <p>Continue</p>
-                </span>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-      {continuePage && (
-        <>
           <div className="complete-overlay">
             <div className="continue-page-image">
               {/* <p className="container-label">Tag image</p> */}
               <img src={confirmUploadedImage} alt="Uploaded" />
               <div className="tagging-options">
-                <div className="headwear">
+                <div
+                  className={`headwear ${
+                    interaction === "headwear" ? "selected" : ""
+                  }`}
+                >
                   <HatIcon
                     onClick={() => updateInteraction("headwear")}
                     className={`hat-icon ${
@@ -226,7 +195,9 @@ const Upload = () => {
                   />
                   <p>Headwear</p>
                 </div>
-                <div className="top">
+                <div
+                  className={`top ${interaction === "top" ? "selected" : ""}`}
+                >
                   <ShirtIcon
                     onClick={() => updateInteraction("top")}
                     className={`shirt-icon ${
@@ -236,7 +207,11 @@ const Upload = () => {
                   />
                   <p>Top</p>
                 </div>
-                <div className="bottom">
+                <div
+                  className={`bottom ${
+                    interaction === "bottom" ? "selected" : ""
+                  }`}
+                >
                   <PantsIcon
                     onClick={() => updateInteraction("bottom")}
                     className={`pants-icon ${
@@ -248,7 +223,11 @@ const Upload = () => {
                   />
                   <p>Bottom</p>
                 </div>
-                <div className="footwear">
+                <div
+                  className={`footwear ${
+                    interaction === "footwear" ? "selected" : ""
+                  }`}
+                >
                   <ShoeIcon
                     onClick={() => updateInteraction("footwear")}
                     className={`shoe-icon ${
@@ -261,14 +240,17 @@ const Upload = () => {
                   <p>Footwear</p>
                 </div>
               </div>
+              <div className="garbage-icon-text">
+                <GarbageIcon
+                  className="garbage-icon"
+                  onClick={handleDiscardClick}
+                />
+              </div>
               <div className="complete-icon-text">
                 <CompleteIcon
                   className="complete-icon"
-                  onClick={handleCompleteClick}
+                  onClick={() => commitUpload(confirmUploadedImage)}
                 />
-                <span className="complete-hover-text">
-                  <p>Complete</p>
-                </span>
               </div>
             </div>
           </div>
