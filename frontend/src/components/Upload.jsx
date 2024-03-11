@@ -16,6 +16,7 @@ const Upload = () => {
   const [confirmUploadedImage, setConfirmUploadedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [interaction, setInteraction] = useState("");
+  const [uploadError, setUploadError] = useState(false);
   const { username } = useAuth();
 
   const fileInputRef = useRef(null);
@@ -73,26 +74,34 @@ const Upload = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const commitUpload = (url) => {
+  const commitUpload = async (url) => {
     console.log("commitUpload called with URL:", url);
+    console.log("Sending to backend:", { url, username, interaction });
+    try {
+      const response = await validateUpload(url, username, interaction);
+      const data = await response.json();
+      if (response.ok) {
+        navigate("/create");
+      } else {
+        if (data.error.includes("interaction")) {
+          console.log("Setting upload error");
+          setUploadError(true);
+        }
+        console.log("Error committing upload:", data.error);
+      }
+    } catch (error) {
+      console.error("Error committing upload", error);
+    }
+  };
 
-    console.log("Sending to backend:", { url, username });
-
-    fetch("http://localhost:5000/commit_upload", {
+  const validateUpload = async (url, username, interaction) => {
+    return fetch("http://localhost:5000/commit_upload", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ url, username }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Committed successfully", data);
-        navigate("/create");
-      })
-      .catch((error) => {
-        console.error("Error committing upload", error);
-      });
+      body: JSON.stringify({ url, username, interaction }),
+    });
   };
 
   const handleDiscardClick = () => {
@@ -252,6 +261,11 @@ const Upload = () => {
                   onClick={() => commitUpload(confirmUploadedImage)}
                 />
               </div>
+              {uploadError && (
+                <div className="error-message">
+                  <h1>Uh oh sphagetti o's</h1>
+                </div>
+              )}
             </div>
           </div>
         </>
