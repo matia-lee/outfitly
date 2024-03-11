@@ -150,13 +150,15 @@ const Upload = () => {
         </div>
       </div>
       <div
-        className={`upload-container ${dragOver ? "drag-over" : ""}`}
+        className={`upload-container ${dragOver ? "drag-over" : ""} ${
+          isLoading ? "loading" : ""
+        }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
         {isLoading ? (
-          <div className="loading-indicator">Uploading...</div> // Display a simple loading text or spinner
+          <div className="loading-indicator"></div>
         ) : (
           <>
             <UploadIcon size="80px" color="#ff9999" />
@@ -183,7 +185,7 @@ const Upload = () => {
         <>
           <div className="overlay">
             <div className="image-preview">
-              <p className="verify-text">Verify</p>
+              {/* <p className="verify-text">Verify</p> */}
               <img src={confirmUploadedImage} alt="Uploaded" />
               <div className="garbage-icon-text">
                 <GarbageIcon
@@ -211,7 +213,7 @@ const Upload = () => {
         <>
           <div className="complete-overlay">
             <div className="continue-page-image">
-              <p className="container-label">Tag image</p>
+              {/* <p className="container-label">Tag image</p> */}
               <img src={confirmUploadedImage} alt="Uploaded" />
               <div className="tagging-options">
                 <div className="headwear">
