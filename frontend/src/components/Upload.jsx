@@ -134,6 +134,7 @@ const Upload = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Interaction updated successfully", data);
+        setUploadError(false);
       })
       .catch((error) => {
         console.error("Error updating interaction", error);
@@ -263,7 +264,8 @@ const Upload = () => {
               </div>
               {uploadError && (
                 <div className="error-message">
-                  <h1>Uh oh sphagetti o's</h1>
+                  <p>Uh oh spaghetti o's</p>
+                  <p>Make sure to categorize!!</p>
                 </div>
               )}
             </div>
