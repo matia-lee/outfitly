@@ -290,7 +290,7 @@ body {
 }
 
 .continue-page-image img {
-  margin-top: 0px;
+  margin-top: 30px;
 }
 
 .tagging-options {
@@ -336,6 +336,21 @@ body {
   color: #aaaaaa;
 }
 
+.hat-icon,
+.shirt-icon,
+.pants-icon,
+.shoe-icon {
+  transition: transform 0.2s ease;
+}
+
+.hat-icon:hover,
+.shirt-icon:hover,
+.pants-icon:hover,
+.shoe-icon:hover {
+  transition: transform 0.2s ease;
+  transform: scale(1.2);
+}
+
 .continue-page-image .container-label {
   position: absolute;
   font-family: "Roboto", sans-serif;
@@ -373,7 +388,7 @@ body {
   background-color: #f2f2f2;
   border-radius: 5px;
   margin-left: 145px;
-  margin-top: -40px;
+  margin-top: -55px;
   width: 30px;
   display: flex;
   justify-content: center;
@@ -401,4 +416,15 @@ body {
 .complete-icon-text:hover .complete-hover-text {
   visibility: visible;
   opacity: 1;
+}
+
+.complete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

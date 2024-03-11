@@ -1,5 +1,6 @@
 import "../static/Upload.css";
 import { useCallback, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Hanger from "../icons/Hanger";
 import UploadIcon from "../icons/UploadIcon";
@@ -19,6 +20,8 @@ const Upload = () => {
   const { username } = useAuth();
 
   const fileInputRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const handleBrowseFileClick = () => {
     setTimeout(() => {
@@ -104,6 +107,10 @@ const Upload = () => {
     }
   };
 
+  const handleCompleteClick = () => {
+    navigate("/create");
+  };
+
   return (
     <>
       <div className="navbar">
@@ -147,7 +154,7 @@ const Upload = () => {
       </div>
       {confirmUploadedImage && (
         <>
-          <div className="overlay">
+          <div className="complete-overlay">
             <div className="image-preview">
               <p className="verify-text">Verify</p>
               <img src={confirmUploadedImage} alt="Uploaded" />
@@ -198,9 +205,7 @@ const Upload = () => {
                 </div>
               </div>
               <div className="complete-icon-text">
-                <CompleteIcon
-                  className="complete-icon"
-                />
+                <CompleteIcon className="complete-icon" onClick={handleCompleteClick}/>
                 <span className="complete-hover-text">
                   <p>Complete</p>
                 </span>
