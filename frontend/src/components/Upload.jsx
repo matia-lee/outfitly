@@ -264,8 +264,8 @@ const Upload = () => {
               </div>
               {uploadError && (
                 <div className="error-message">
-                  <p>Uh oh spaghetti o's</p>
-                  <p>Make sure to categorize!!</p>
+                  <p className="first-error-line">Uh oh spaghetti o's</p>
+                  <p className="second-error-line">Make sure to categorize!!</p>
                 </div>
               )}
             </div>
