@@ -50,12 +50,12 @@ const Closet = () => {
           >
             <ClosetClothesIcon className="closet-clothes-icon" />
             <span>Clothes closet</span>
-            <ArrowIcon className="arrow-icon" color="white" />
+            <ArrowIcon className="arrow-icon" color="#ffeeee" />
           </button>
           <button className="individual-options">
             <ClosetFitIcon className="closet-fit-icon" />
             <span>Fit closet</span>
-            <ArrowIcon className="arrow-icon" color="white" />
+            <ArrowIcon className="arrow-icon" color="#ffeeee" />
           </button>
         </div>
       </div>
