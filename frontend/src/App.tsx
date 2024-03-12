@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Homepage from "./components/Homepage";
 import Upload from "./components/Upload";
 import Create from "./components/Create";
+import Closet from "./components/Closet";
+import ClosetClothes from "./components/ClosetClothes";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/create" element={<Create />} />
+            <Route path="/closet" element={<Closet />} />
+            <Route path="/closet/clothes" element={<ClosetClothes />} />
           </Routes>
         </div>
       </AuthProvider>

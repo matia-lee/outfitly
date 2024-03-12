@@ -49,13 +49,13 @@ const Homepage = () => {
             <UploadIcon />
             <h3>Upload</h3>
           </div>
-          <div className="create-icon" onClick={handleCreateClick}>
-            <CreateIcon />
-            <h3>Create</h3>
-          </div>
           <div className="closet-icon" onClick={handleClosetClick}>
             <ClosetIcon />
             <h3>Closet</h3>
+          </div>
+          <div className="create-icon" onClick={handleCreateClick}>
+            <CreateIcon />
+            <h3>Create</h3>
           </div>
           <div className="discover-icon" onClick={handleDiscoverClick}>
             <DiscoverIcon />

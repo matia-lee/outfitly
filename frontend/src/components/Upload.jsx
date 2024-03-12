@@ -91,7 +91,7 @@ const Upload = () => {
       const response = await validateUpload(url, username, interaction);
       const data = await response.json();
       if (response.ok) {
-        navigate("/create");
+        navigate("/closet/clothes");
       } else {
         if (data.error.includes("interaction")) {
           console.log("Setting upload error");
