@@ -18,11 +18,17 @@ const Upload = () => {
   const [interaction, setInteraction] = useState("");
   const [uploadError, setUploadError] = useState(false);
   const [fileTypeError, setFileTypeError] = useState(false);
+  const [spin, setSpin] = useState(false);
   const { username } = useAuth();
 
   const fileInputRef = useRef(null);
 
   const navigate = useNavigate();
+
+  const handleHangerClick = () => {
+    setSpin(true);
+    setTimeout(() => setSpin(false), 600);
+  };
 
   const handleBrowseFileClick = () => {
     setTimeout(() => {
@@ -126,14 +132,18 @@ const Upload = () => {
     setUploadError(false);
   };
 
+  const handleLogoClick = () => {
+    navigate("/homepage");
+  };
+
   return (
     <>
       <div className="navbar">
-        <div className="uploadpage-icon">
-          <Hanger color="#ff9999" />
+        <div className="uploadpage-icon" onClick={handleHangerClick}>
+          <Hanger className={spin ? "spin-animation" : ""} color="#ff9999" />
         </div>
         <div className="logo">
-          <div className="title">Outfitly</div>
+          <div className="title" onClick={handleLogoClick}>Outfitly</div>
           <div className="subtitle">Upload images</div>
         </div>
       </div>
