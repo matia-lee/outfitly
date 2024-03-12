@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Hanger from "../icons/Hanger";
 import UploadIcon from "../icons/UploadIcon";
+import CreateIcon from "../icons/CreateIcon";
 
 const ClosetClothes = () => {
   const [spin, setSpin] = useState(false);
@@ -21,6 +22,10 @@ const ClosetClothes = () => {
 
   const handleUploadClick = () => {
     navigate("/upload");
+  };
+
+  const handleCreateClick = () => {
+    navigate("/create");
   };
 
   useEffect(() => {
@@ -48,6 +53,10 @@ const ClosetClothes = () => {
           <UploadIcon />
           <h3>Upload</h3>
         </div>
+        <div className="create-icon-closet" onClick={handleCreateClick}>
+            <CreateIcon />
+            <h3>Create</h3>
+          </div>
         {images.map((image) => (
           <div className="clothes-container" key={image.id}>
             <img src={image.file_url} alt="user_clothes" />

@@ -24,6 +24,22 @@
   align-items: center;
 }
 
+.create-icon-closet {
+  border: solid 4px #ffbbbb;
+  padding: 82px;
+  width: 128px;
+  height: auto;
+  border-radius: 20px;
+  background-color: #ffeeee;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .clothes-container {
   width: 300px;
   height: 300px;
@@ -47,11 +63,13 @@
   transform: scale(1.07);
 }
 
+.create-icon-closet:hover,
 .clothes-container:hover {
   transform: scale(1.07);
 }
 
-.upload-icon-closet h3 {
+.upload-icon-closet h3,
+.create-icon-closet h3 {
   position: absolute;
   font-family: "Roboto", sans-serif;
   color: #bbbbbb;
