@@ -1,3 +1,105 @@
-.clothes {
-  color: green;
+.closet-subtitle {
+  font-family: "Roboto", sans-serif;
+  color: #bbbbbb;
+  font-size: 13px;
+  margin-top: -7px;
+  margin-left: 3px;
+}
+
+.individual-options {
+  margin: 20px;
+  margin-top: 20px;
+  letter-spacing: 2px;
+  color: rgba(255, 102, 102, 0.8);
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: white;
+  border: solid 2px rgba(252, 176, 177, 1);
+  border-radius: 5px;
+  padding: 20px 40px;
+  box-shadow: 0px 6px 0px rgba(255, 153, 153, 1);
+  transition: background-position 0.3s ease, color 0.5s ease;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 204, 204, 1) 0%,
+    rgba(255, 204, 204, 1) 50%,
+    white 50%
+  );
+  background-size: 200% 100%;
+  background-position: right bottom;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 100px;
+}
+
+.individual-options:hover {
+  background-position: left bottom;
+  color: rgba(255, 102, 102, 1);
+}
+
+.individual-options:active {
+  box-shadow: 0px 2px 0px rgba(255, 153, 153, 1);
+  position: relative;
+  top: 2px;
+}
+
+.arrow-icon {
+  position: absolute;
+  margin-left: 200px;
+}
+
+.arrow-icon path {
+  transition: stroke 0.1s ease;
+}
+
+.individual-options:hover .arrow-icon path {
+  stroke: rgba(255, 102, 102, 0.8);
+  transition: stroke 0.18s ease 0.05s;
+}
+
+.closet-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.closet-clothes-icon {
+  margin-top: -3px;
+  padding-right: 5px;
+}
+
+.closet-fit-icon {
+  padding-right: 7px;
+  margin-left: -38px;
+}
+
+.options-container {
+  background-color: white;
+  width: 500px;
+  height: 360px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 130px;
+}
+
+.navigate-to-container {
+  position: absolute;
+  margin-top: -300px;
+  margin-left: -365px;
+}
+
+.navigate-to-container h3 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #9b9b9b;
 }
