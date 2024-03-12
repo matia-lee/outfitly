@@ -89,10 +89,6 @@ def commit_upload():
     elif not interaction:
         return jsonify(error="Missing interaction"), 400
     
-    # existing_record = db_session.query(ImageModel).filter_by(username=username, file_url=url).first()
-    # if existing_record:
-    #     return jsonify(message="Exists"), 409
-    
     try:
         image_record = ImageModel(username=username, file_url=url, interaction=interaction)
         db_session.add(image_record)
@@ -103,6 +99,12 @@ def commit_upload():
         return jsonify(error="Error saving to database"), 500
 
     return jsonify(message="Upload committed successfully", url=url, interaction=interaction), 200
+
+@app.route('/get_clothes', methods=['GET'])
+def get_clothes():
+    clothes = db_session.query(ImageModel)
+    clothes_list = [{"id": image.id, "username": image.username, "file_url": image.file_url, "interaction": image.interaction} for image in clothes]
+    return jsonify(clothes_list)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

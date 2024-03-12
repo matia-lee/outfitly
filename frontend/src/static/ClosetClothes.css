@@ -1,3 +1,62 @@
-.test {
-  color: blue;
+.clothes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 55px;
+  width: 1365px;
+  margin: auto;
+  margin-top: 55px;
+  margin-bottom: 55px;
+}
+
+.upload-icon-closet {
+  border: dashed 4px #ffbbbb;
+  padding: 82px;
+  width: 128px;
+  height: auto;
+  border-radius: 20px;
+  background-color: #ffeeee;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.clothes-container {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clothes-container img {
+  width: 100%;
+  height: auto;
+}
+
+.upload-icon-closet:hover {
+  transform: scale(1.07);
+}
+
+.clothes-container:hover {
+  transform: scale(1.07);
+}
+
+.upload-icon-closet h3 {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  color: #bbbbbb;
+  font-weight: 500;
+  font-size: 13px;
+  margin-top: 70px;
+  margin-left: 1px;
 }
