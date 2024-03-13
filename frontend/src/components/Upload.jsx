@@ -10,6 +10,7 @@ import ShirtIcon from "../icons/ShirtIcon";
 import PantsIcon from "../icons/PantsIcon";
 import ShoeIcon from "../icons/ShoeIcon";
 import CompleteIcon from "../icons/CompleteIcon";
+import ExitIcon from "../icons/ExitIcon";
 
 const Upload = () => {
   const [dragOver, setDragOver] = useState(false);
@@ -55,12 +56,8 @@ const Upload = () => {
     }
   }, []);
 
+
   const handleFileUpload = (file) => {
-    if (file.type !== "image/png") {
-      setFileTypeError(true);
-      return;
-    }
-    setIsLoading(true);
     const formData = new FormData();
     formData.append("file", file);
 
@@ -121,7 +118,13 @@ const Upload = () => {
   const handleFileSelection = (e) => {
     const files = e.target.files;
     if (files.length) {
-      handleFileUpload(files[0]);
+      const file = files[0];
+      if (file.type !== "image/png") {
+        setFileTypeError(true);
+        e.target.value = null;
+        return;
+      }
+      handleFileUpload(file);
     }
   };
 
@@ -143,7 +146,9 @@ const Upload = () => {
           <Hanger className={spin ? "spin-animation" : ""} color="#ff9999" />
         </div>
         <div className="logo">
-          <div className="title" onClick={handleLogoClick}>Outfitly</div>
+          <div className="title" onClick={handleLogoClick}>
+            Outfitly
+          </div>
           <div className="subtitle">Upload images</div>
         </div>
       </div>
@@ -268,10 +273,15 @@ const Upload = () => {
         </>
       )}
       {fileTypeError && (
-        <div>
-          <div>hello</div>
-          <div onClick={() => setFileTypeError(false)}>
-            Uh oh.. peepeepoopoo
+        <div className="file-type-error-overlay">
+          <div className="file-type-error">
+            <div onClick={() => setFileTypeError(false)}>
+              <ExitIcon className="exit-icon" color="#cccccc" />
+              <div className="file-type-error-message">
+                <p>😧 incorrect file type detected</p>
+                <p><span className="png-only">PNG only</span> please!</p>
+              </div>
+            </div>
           </div>
         </div>
       )}

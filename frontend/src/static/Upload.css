@@ -146,6 +146,7 @@ body {
   color: #aaaaaa;
   font-size: 14px;
   margin-top: -10px;
+  z-index: 0;
 }
 
 .browse-files-button {
@@ -158,6 +159,7 @@ body {
   border: solid 2px #ff9999;
   background-color: white;
   font-size: 13px;
+  z-index: 0;
 }
 
 .browse-files-button:hover {
@@ -360,4 +362,66 @@ body {
   padding-right: 10px;
   margin: 0px;
   color: #ff6666;
+}
+
+.exit-icon {
+  cursor: pointer;
+  position: absolute;
+  margin-top: -45px;
+  margin-left: 267px;
+  border: solid 2px #cccccc;
+  border-radius: 7px;
+  padding: 2px;
+  padding-top: 2.5px;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+}
+
+.file-type-error {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  margin-top: -20px;
+  width: 400px;
+  height: 150px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+}
+
+.file-type-error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-type-error-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-type-error-message p {
+  font-family: "Roboto", sans-serif;
+  color: #9b9b9b;
+  margin: 0px;
+  font-weight: 400;
+}
+
+.png-only {
+  font-family: "Roboto", sans-serif;
+  color: #ff6666;
+  font-weight: 500;
+  text-decoration: underline;
 }
