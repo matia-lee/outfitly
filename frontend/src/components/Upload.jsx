@@ -60,6 +60,7 @@ const Upload = () => {
   const handleFileUpload = (file) => {
     const formData = new FormData();
     formData.append("file", file);
+    setIsLoading(true);
 
     fetch("http://localhost:5000/temporary_upload", {
       method: "POST",
