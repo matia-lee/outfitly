@@ -106,6 +106,13 @@ def get_clothes():
     clothes_list = [{"id": image.id, "username": image.username, "file_url": image.file_url, "interaction": image.interaction} for image in clothes]
     return jsonify(clothes_list)
 
+@app.route('/get_specific_clothes', methods=['GET'])
+def get_specific_clothes():
+    interaction_type = request.args.get('interaction')
+    images = db_session.query(ImageModel).filter_by(interaction = interaction_type).all()
+    image_urls = [image.file_url for image in images]
+    return jsonify(image_urls)
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
