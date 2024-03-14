@@ -1,3 +1,51 @@
-.test {
-  color: red;
+.outfit-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.scroll-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outfit-column img {
+  width: 300px;
+  height: auto;
+}
+
+.navigation-buttons {
+  display: flex;
+  position: absolute;
+  margin-top: -10px;
+  width: 280px;
+  justify-content: space-between;
+}
+
+.previous-create-icon,
+.next-create-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.previous-create-icon:hover,
+.next-create-icon:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.3);
+}
+
+/* .create-page-top,
+.create-page-bottom {
+  margin-top: -20px;
+}
+
+.create-page-headwear {
+  margin-top: 20px;
+  margin-bottom: -30px;
+}
+
+.create-page-footwear {
+  margin-top: -50px;
+} */

@@ -2,6 +2,8 @@ import "../static/Create.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Hanger from "../icons/Hanger";
+import NextCreateIcon from "../icons/NextCreateIcon";
+import PreviousCreateIcon from "../icons/PreviousCreateIcon";
 
 const Create = () => {
   const [spin, setSpin] = useState(false);
@@ -9,6 +11,10 @@ const Create = () => {
   const [top, setTop] = useState([]);
   const [bottom, setBottom] = useState([]);
   const [footwear, setFootwear] = useState([]);
+  const [headwearIndex, setHeadwearIndex] = useState(0);
+  const [topIndex, setTopIndex] = useState(0);
+  const [bottomIndex, setBottomIndex] = useState(0);
+  const [footwearIndex, setFootwearIndex] = useState(0);
 
   const navigate = useNavigate();
 
@@ -51,6 +57,44 @@ const Create = () => {
     fetchImages("footwear", setFootwear);
   }, []);
 
+  const handleNextHeadwearClick = () => {
+    setHeadwearIndex((prevIndex) => (prevIndex + 1) % headwear.length);
+  };
+
+  const handlePreviousHeadwearClick = () => {
+    setHeadwearIndex(
+      (prevIndex) => (prevIndex - 1 + headwear.length) % headwear.length
+    );
+  };
+
+  const handleNextTopClick = () => {
+    setTopIndex((prevIndex) => (prevIndex + 1) % top.length);
+  };
+
+  const handlePreviousTopClick = () => {
+    setTopIndex((prevIndex) => (prevIndex - 1 + top.length) % top.length);
+  };
+
+  const handleNextBottomClick = () => {
+    setBottomIndex((prevIndex) => (prevIndex + 1) % bottom.length);
+  };
+
+  const handlePreviousBottomClick = () => {
+    setBottomIndex(
+      (prevIndex) => (prevIndex - 1 + bottom.length) % bottom.length
+    );
+  };
+
+  const handleNextFootwearClick = () => {
+    setFootwearIndex((prevIndex) => (prevIndex + 1) % footwear.length);
+  };
+
+  const handlePreviousFootwearClick = () => {
+    setFootwearIndex(
+      (prevIndex) => (prevIndex - 1 + footwear.length) % footwear.length
+    );
+  };
+
   return (
     <div>
       <div className="navbar">
@@ -66,24 +110,92 @@ const Create = () => {
       </div>
       <div className="outfit-column">
         <div className="create-page-headwear">
-          {headwear.map((url, index) => (
-            <img key={index} src={url} alt="headwear" />
-          ))}
+          {headwear.length === 0 && <div>Upload headwear photos</div>}
+          {headwear.length > 0 && (
+            <div className="scroll-container">
+              <img
+                key={headwearIndex}
+                src={headwear[headwearIndex]}
+                alt="headwear"
+              />
+              {headwear.length > 1 && (
+                <div className="navigation-buttons">
+                  <PreviousCreateIcon
+                    onClick={handlePreviousHeadwearClick}
+                    className="previous-create-icon"
+                  />
+                  <NextCreateIcon
+                    onClick={handleNextHeadwearClick}
+                    className="next-create-icon"
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className="create-page-top">
-          {top.map((url, index) => (
-            <img key={index} src={url} alt="top" />
-          ))}
+          {top.length === 0 && <div>Upload top photos</div>}
+          {top.length > 0 && (
+            <div className="scroll-container">
+              <img key={topIndex} src={top[topIndex]} alt="top" />
+              {top.length > 1 && (
+                <div className="navigation-buttons">
+                  <PreviousCreateIcon
+                    onClick={handlePreviousTopClick}
+                    className="previous-create-icon"
+                  />
+                  <NextCreateIcon
+                    onClick={handleNextTopClick}
+                    className="next-create-icon"
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className="create-page-bottom">
-          {bottom.map((url, index) => (
-            <img key={index} src={url} alt="bottom" />
-          ))}
+          {bottom.length === 0 && <div>Upload bottom photos</div>}
+          {bottom.length > 0 && (
+            <div className="scroll-container">
+              <img key={bottomIndex} src={bottom[bottomIndex]} alt="bottom" />
+              {bottom.length > 1 && (
+                <div className="navigation-buttons">
+                  <PreviousCreateIcon
+                    onClick={handlePreviousBottomClick}
+                    className="previous-create-icon"
+                  />
+                  <NextCreateIcon
+                    onClick={handleNextBottomClick}
+                    className="next-create-icon"
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className="create-page-footwear">
-          {footwear.map((url, index) => (
-            <img key={index} src={url} alt="footwear" />
-          ))}
+          {footwear.length === 0 && <div>Upload footwear photos</div>}
+          {footwear.length > 0 && (
+            <div className="scroll-container">
+              <img
+                key={footwearIndex}
+                src={footwear[footwearIndex]}
+                alt="footwear"
+              />
+              {footwear.length > 1 && (
+                <div className="navigation-buttons">
+                  <PreviousCreateIcon
+                    onClick={handlePreviousFootwearClick}
+                    className="previous-create-icon"
+                  />
+                  <NextCreateIcon
+                    onClick={handleNextFootwearClick}
+                    className="next-create-icon"
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
