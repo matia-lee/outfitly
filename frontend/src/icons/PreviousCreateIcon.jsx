@@ -1,4 +1,4 @@
-const PreviousCreateIcon = ({ color = "#bbbbbb", className, onClick }) => {
+const PreviousCreateIcon = ({ color = "#cccccc", className, onClick }) => {
   return (
     <svg
       fill={color}

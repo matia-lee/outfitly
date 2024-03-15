@@ -1,4 +1,4 @@
-const NextCreateIcon = ({ color = "#bbbbbb", className, onClick }) => {
+const NextCreateIcon = ({ color = "#cccccc", className, onClick }) => {
   return (
     <svg
       fill={color}

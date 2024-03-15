@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Hanger from "../icons/Hanger";
 import NextCreateIcon from "../icons/NextCreateIcon";
 import PreviousCreateIcon from "../icons/PreviousCreateIcon";
+import DiceIcon from "../icons/DiceIcon";
+import BookmarkIcon from "../icons/BookmarkIcon";
 
 const Create = () => {
   const [spin, setSpin] = useState(false);
@@ -15,6 +17,7 @@ const Create = () => {
   const [topIndex, setTopIndex] = useState(0);
   const [bottomIndex, setBottomIndex] = useState(0);
   const [footwearIndex, setFootwearIndex] = useState(0);
+  const [fill, setFill] = useState("none");
 
   const navigate = useNavigate();
 
@@ -95,6 +98,10 @@ const Create = () => {
     );
   };
 
+  const toggleFill = () => {
+    setFill(fill === "none" ? "#ffdddd" : "none");
+  };
+
   return (
     <div>
       <div className="navbar">
@@ -114,6 +121,7 @@ const Create = () => {
           {headwear.length > 0 && (
             <div className="scroll-container">
               <img
+                className="headwear-image"
                 key={headwearIndex}
                 src={headwear[headwearIndex]}
                 alt="headwear"
@@ -137,7 +145,12 @@ const Create = () => {
           {top.length === 0 && <div>Upload top photos</div>}
           {top.length > 0 && (
             <div className="scroll-container">
-              <img key={topIndex} src={top[topIndex]} alt="top" />
+              <img
+                className="top-image"
+                key={topIndex}
+                src={top[topIndex]}
+                alt="top"
+              />
               {top.length > 1 && (
                 <div className="navigation-buttons">
                   <PreviousCreateIcon
@@ -157,7 +170,12 @@ const Create = () => {
           {bottom.length === 0 && <div>Upload bottom photos</div>}
           {bottom.length > 0 && (
             <div className="scroll-container">
-              <img key={bottomIndex} src={bottom[bottomIndex]} alt="bottom" />
+              <img
+                className="bottom-image"
+                key={bottomIndex}
+                src={bottom[bottomIndex]}
+                alt="bottom"
+              />
               {bottom.length > 1 && (
                 <div className="navigation-buttons">
                   <PreviousCreateIcon
@@ -178,6 +196,7 @@ const Create = () => {
           {footwear.length > 0 && (
             <div className="scroll-container">
               <img
+                className="footwear-image"
                 key={footwearIndex}
                 src={footwear[footwearIndex]}
                 alt="footwear"
@@ -197,6 +216,16 @@ const Create = () => {
             </div>
           )}
         </div>
+      </div>
+      <div>
+        <DiceIcon className="dice-icon" />
+      </div>
+      <div>
+        <BookmarkIcon
+          className="bookmark-icon"
+          fill={fill}
+          onClick={toggleFill}
+        />
       </div>
     </div>
   );
