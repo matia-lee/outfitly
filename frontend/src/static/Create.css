@@ -33,6 +33,12 @@
   margin-top: -10px;
   width: 290px;
   justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.scroll-container:hover .navigation-buttons {
+  opacity: 1;
 }
 
 .previous-create-icon,
