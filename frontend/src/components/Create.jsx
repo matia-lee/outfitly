@@ -102,6 +102,41 @@ const Create = () => {
     setFill(fill === "none" ? "#ffdddd" : "none");
   };
 
+  const randomHeadwearIndex = () => {
+    if (headwear.length > 0) {
+      const randomNumber = Math.floor(Math.random() * headwear.length);
+      setHeadwearIndex(randomNumber);
+    }
+  };
+
+  const randomTopIndex = () => {
+    if (top.length > 0) {
+      const randomNumber = Math.floor(Math.random() * top.length);
+      setTopIndex(randomNumber);
+    }
+  };
+
+  const randomBottomIndex = () => {
+    if (bottom.length > 0) {
+      const randomNumber = Math.floor(Math.random() * bottom.length);
+      setBottomIndex(randomNumber);
+    }
+  };
+
+  const randomFootwearIndex = () => {
+    if (footwear.length > 0) {
+      const randomNumber = Math.floor(Math.random() * footwear.length);
+      setFootwearIndex(randomNumber);
+    }
+  };
+
+  const handleDiceClick = () => {
+    randomHeadwearIndex();
+    randomTopIndex();
+    randomBottomIndex();
+    randomFootwearIndex();
+  };
+
   return (
     <div>
       <div className="navbar">
@@ -218,7 +253,7 @@ const Create = () => {
         </div>
       </div>
       <div>
-        <DiceIcon className="dice-icon" />
+        <DiceIcon className="dice-icon" onClick={handleDiceClick} />
       </div>
       <div>
         <BookmarkIcon
