@@ -41,11 +41,11 @@ const ClosetFits = () => {
       <div className="fit-images">
         {images.map((image) => (
           <div className="individual-fit" key={image.id}>
+            <p className="fit_name">{image.fit_name}</p>
             <img src={image.headwear} alt="headwear" className="fit-headwear" />
             <img src={image.top} alt="top" className="fit-item" />
             <img src={image.bottom} alt="bottom" className="fit-item" />
             <img src={image.footwear} alt="footwear" className="fit-item" />
-            <p className="fit_name">{image.fit_name}</p>
           </div>
         ))}
       </div>
