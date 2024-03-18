@@ -76,29 +76,16 @@ body {
 }
 
 .upload-container.loading {
-  /* animation: pulseBackground 2.5s infinite; */
   background-color: #ffeeee;
 }
 
-/* @keyframes pulseBackground {
-  0% {
-    background-color: #fff;
-  }
-  50% {
-    background-color: #ffeeee;
-  }
-  100% {
-    background-color: #fff;
-  }
-} */
-
 .loading-indicator {
-  border: 8px solid white;
-  border-top: 8px solid #ff9999;
-  border-radius: 50%;
   width: 40px;
   height: 40px;
-  animation: spin 1s linear infinite;
+  border: 7px solid white;
+  border-left-color: #ff9999;
+  border-radius: 45%;
+  animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
