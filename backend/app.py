@@ -117,6 +117,7 @@ def get_specific_clothes():
 def save_outfit():
     data = request.json
     new_outfit = Outfits(
+        username=data['username'],
         headwear = data.get('headwear', ''),
         top = data.get('top', ''),
         bottom = data.get('bottom', ''),
@@ -127,6 +128,12 @@ def save_outfit():
     db_session.commit()
 
     return jsonify({"message": "Outfit saved successfully"}), 200
+
+@app.route('/get_fits', methods=['GET'])
+def get_fits():
+    clothes = db_session.query(Outfits)
+    clothes_list = [{"outfit_id": image.outfit_id, "username": image.username, "headwear": image.headwear, "top": image.top, "bottom": image.bottom, "footwear": image.footwear, "fit_name": image.fit_name} for image in clothes]
+    return jsonify(clothes_list)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

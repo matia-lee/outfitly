@@ -1,3 +1,25 @@
-.test {
-  color: red;
+.fit-images {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Creates four columns */
+  gap: 20px; /* Space between grid items */
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.individual-fit {
+  display: flex;
+  flex-direction: column; /* Stack items vertically in each fit */
+  align-items: center; /* Center items horizontally */
+  gap: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.fit-item {
+  width: 100px; /* Adjust based on your preference */
+  height: 100px; /* Adjust based on your preference */
+  object-fit: cover;
+  border-radius: 4px;
 }

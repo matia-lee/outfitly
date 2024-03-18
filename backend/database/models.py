@@ -19,6 +19,7 @@ class ImageModel(Base):
 class Outfits(Base):
     __tablename__ ='fits'
     outfit_id = Column(Integer, primary_key=True)
+    username = Column(String(80), nullable=False)
     headwear = Column(String(255), nullable=True)
     top = Column(String(255), nullable=True)
     bottom = Column(String(255), nullable=True)

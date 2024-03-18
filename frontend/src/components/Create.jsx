@@ -1,6 +1,7 @@
 import "../static/Create.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 import Hanger from "../icons/Hanger";
 import NextCreateIcon from "../icons/NextCreateIcon";
 import PreviousCreateIcon from "../icons/PreviousCreateIcon";
@@ -20,6 +21,8 @@ const Create = () => {
   const [saveFit, setSaveFit] = useState(false);
   const [fill, setFill] = useState("none");
   const [fitName, setFitName] = useState("");
+
+  const { username } = useAuth();
 
   const navigate = useNavigate();
 
@@ -142,6 +145,7 @@ const Create = () => {
 
   const saveCurrentFits = async () => {
     const outfit = {
+      username,
       headwear: headwear.length > 0 ? headwear[headwearIndex] : "",
       top: top.length > 0 ? top[topIndex] : "",
       bottom: bottom.length > 0 ? bottom[bottomIndex] : "",
@@ -158,7 +162,7 @@ const Create = () => {
         body: JSON.stringify(outfit),
       });
 
-      navigate("/closet/fits")
+      navigate("/closet/fits");
 
       if (!response.ok) {
         throw new Error("Failed to save outfit");
