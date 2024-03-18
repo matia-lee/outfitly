@@ -19,6 +19,7 @@ const Create = () => {
   const [footwearIndex, setFootwearIndex] = useState(0);
   const [saveFit, setSaveFit] = useState(false);
   const [fill, setFill] = useState("none");
+  const [fitName, setFitName] = useState("");
 
   const navigate = useNavigate();
 
@@ -137,6 +138,34 @@ const Create = () => {
     randomTopIndex();
     randomBottomIndex();
     randomFootwearIndex();
+  };
+
+  const saveCurrentFits = async () => {
+    const outfit = {
+      headwear: headwear.length > 0 ? headwear[headwearIndex] : "",
+      top: top.length > 0 ? top[topIndex] : "",
+      bottom: bottom.length > 0 ? bottom[bottomIndex] : "",
+      footwear: footwear.length > 0 ? footwear[footwearIndex] : "",
+      fit_name: fitName,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/fit_check", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(outfit),
+      });
+
+      navigate("/closet/fits")
+
+      if (!response.ok) {
+        throw new Error("Failed to save outfit");
+      }
+    } catch (error) {
+      console.error("Uh oh fit check gone wrong", error);
+    }
   };
 
   return (
@@ -272,8 +301,9 @@ const Create = () => {
               type="text"
               placeholder="Name"
               className="name-fit-input-box"
+              onChange={(e) => setFitName(e.target.value)}
             />
-            <button className="save-fit-confirm">
+            <button className="save-fit-confirm" onClick={saveCurrentFits}>
               Confirm
             </button>
           </div>

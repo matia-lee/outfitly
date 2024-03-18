@@ -8,7 +8,7 @@ from uuid import uuid4
 from werkzeug.utils import secure_filename
 from scripts.background_remover import remove_background_and_save
 from PIL import Image
-from database.models import ImageModel
+from database.models import ImageModel, Outfits
 from database.database import db_session
 import os
 from dotenv import load_dotenv
@@ -112,6 +112,21 @@ def get_specific_clothes():
     images = db_session.query(ImageModel).filter_by(interaction = interaction_type).all()
     image_urls = [image.file_url for image in images]
     return jsonify(image_urls)
+
+@app.route('/fit_check', methods=['POST'])
+def save_outfit():
+    data = request.json
+    new_outfit = Outfits(
+        headwear = data.get('headwear', ''),
+        top = data.get('top', ''),
+        bottom = data.get('bottom', ''),
+        footwear = data.get('footwear', ''),
+        fit_name = data.get('fit_name', '')
+    )
+    db_session.add(new_outfit)
+    db_session.commit()
+
+    return jsonify({"message": "Outfit saved successfully"}), 200
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

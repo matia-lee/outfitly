@@ -8,6 +8,7 @@ import Upload from "./components/Upload";
 import Create from "./components/Create";
 import Closet from "./components/Closet";
 import ClosetClothes from "./components/ClosetClothes";
+import ClosetFits from "./components/ClosetFits";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/create" element={<Create />} />
             <Route path="/closet" element={<Closet />} />
             <Route path="/closet/clothes" element={<ClosetClothes />} />
+            <Route path="/closet/fits" element={<ClosetFits />} />
           </Routes>
         </div>
       </AuthProvider>

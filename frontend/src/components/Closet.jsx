@@ -26,6 +26,12 @@ const Closet = () => {
     }, 150);
   };
 
+  const handleFitsClosetClick = () => {
+    setTimeout(() => {
+      navigate("/closet/fits");
+    }, 150);
+  };
+
   return (
     <>
       <div className="navbar">
@@ -52,7 +58,10 @@ const Closet = () => {
             <span>Clothes closet</span>
             <ArrowIcon className="arrow-icon" color="#ffeeee" />
           </button>
-          <button className="individual-options">
+          <button
+            className="individual-options"
+            onClick={handleFitsClosetClick}
+          >
             <ClosetFitIcon className="closet-fit-icon" />
             <span>Fit closet</span>
             <ArrowIcon className="arrow-icon" color="#ffeeee" />
