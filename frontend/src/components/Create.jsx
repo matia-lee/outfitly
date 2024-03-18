@@ -17,6 +17,7 @@ const Create = () => {
   const [topIndex, setTopIndex] = useState(0);
   const [bottomIndex, setBottomIndex] = useState(0);
   const [footwearIndex, setFootwearIndex] = useState(0);
+  const [saveFit, setSaveFit] = useState(false);
   const [fill, setFill] = useState("none");
 
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Create = () => {
   };
 
   const handleLogoClick = () => {
-    navigate("/closet");
+    navigate("/homepage");
   };
 
   const fetchImages = (interactionType, setState) => {
@@ -100,6 +101,7 @@ const Create = () => {
 
   const toggleFill = () => {
     setFill(fill === "none" ? "#ffdddd" : "none");
+    setSaveFit(true);
   };
 
   const randomHeadwearIndex = () => {
@@ -262,6 +264,21 @@ const Create = () => {
           onClick={toggleFill}
         />
       </div>
+      {saveFit && (
+        <div className="save-fit-overlay">
+          <div className="name-fit">
+            <p>Name this fit:</p>
+            <input
+              type="text"
+              placeholder="Name"
+              className="name-fit-input-box"
+            />
+            <button className="save-fit-confirm">
+              Confirm
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
