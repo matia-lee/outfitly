@@ -45,6 +45,7 @@ const ClosetFits = () => {
             <img src={image.top} alt="top" className="fit-item" />
             <img src={image.bottom} alt="bottom" className="fit-item" />
             <img src={image.footwear} alt="footwear" className="fit-item" />
+            <p className="fit_name">{image.fit_name}</p>
           </div>
         ))}
       </div>
