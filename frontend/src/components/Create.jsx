@@ -7,6 +7,7 @@ import NextCreateIcon from "../icons/NextCreateIcon";
 import PreviousCreateIcon from "../icons/PreviousCreateIcon";
 import DiceIcon from "../icons/DiceIcon";
 import BookmarkIcon from "../icons/BookmarkIcon";
+import ExitIcon from "../icons/ExitIcon";
 
 const Create = () => {
   const [spin, setSpin] = useState(false);
@@ -133,6 +134,13 @@ const Create = () => {
     if (footwear.length > 0) {
       const randomNumber = Math.floor(Math.random() * footwear.length);
       setFootwearIndex(randomNumber);
+    }
+  };
+
+  const handleOverlayClick = (event) => {
+    if (event.target === event.currentTarget) {
+      setSaveFit(false);
+      setFill("none");
     }
   };
 
@@ -298,7 +306,7 @@ const Create = () => {
         />
       </div>
       {saveFit && (
-        <div className="save-fit-overlay">
+        <div className="save-fit-overlay" onClick={handleOverlayClick}>
           <div className="name-fit">
             <p>Name this fit:</p>
             <input
@@ -306,6 +314,11 @@ const Create = () => {
               placeholder="Name"
               className="name-fit-input-box"
               onChange={(e) => setFitName(e.target.value)}
+            />
+            <ExitIcon
+              className="name-fit-exit-icon"
+              color="#aaaaaa"
+              onClick={handleOverlayClick}
             />
             <button className="save-fit-confirm" onClick={saveCurrentFits}>
               Confirm
