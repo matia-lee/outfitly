@@ -102,7 +102,11 @@ def commit_upload():
 
 @app.route('/get_clothes', methods=['GET'])
 def get_clothes():
-    clothes = db_session.query(ImageModel)
+    interaction_filter = request.args.get('interaction')
+    if interaction_filter:
+        clothes = db_session.query(ImageModel).filter(ImageModel.interaction == interaction_filter)
+    else:
+        clothes = db_session.query(ImageModel)
     clothes_list = [{"id": image.id, "username": image.username, "file_url": image.file_url, "interaction": image.interaction} for image in clothes]
     return jsonify(clothes_list)
 
