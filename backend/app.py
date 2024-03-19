@@ -14,7 +14,6 @@ from uuid import uuid4
 from werkzeug.utils import secure_filename
 from scripts.background_remover import remove_background_and_save
 from PIL import Image
-from database.models import ImageModel, Outfits
 from database.database import db_session
 import os
 from dotenv import load_dotenv
