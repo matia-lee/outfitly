@@ -13,12 +13,23 @@ import FootwearFilterIcon from "../icons/FootwearFilter";
 const ClosetClothes = () => {
   const [images, setImages] = useState([]);
   const [currentFilter, setCurrentFilter] = useState("");
+  const [flippedImage, setFlippedImage] = useState(false);
   const navigate = useNavigate();
 
   const handleFilterClick = (filterName) => {
     setCurrentFilter((prevFilter) =>
       prevFilter === filterName ? "" : filterName
     );
+  };
+
+  const handleFlippedImage = (image) => {
+    setFlippedImage(image);
+  };
+
+  const handleOverlayClick = (event) => {
+    if (event.target === event.currentTarget) {
+      setFlippedImage(false);
+    }
   };
 
   useEffect(() => {
@@ -28,6 +39,17 @@ const ClosetClothes = () => {
       .then((data) => setImages(data))
       .catch((error) => console.error("Error grabbing images:", error));
   }, [currentFilter]);
+
+  useEffect(() => {
+    if (flippedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [flippedImage]);
 
   return (
     <div>
@@ -98,11 +120,25 @@ const ClosetClothes = () => {
           <h3>Create</h3>
         </div>
         {images.map((image) => (
-          <div className="clothes-container" key={image.id}>
+          <div
+            className="clothes-container"
+            key={image.id}
+            onClick={() => handleFlippedImage(image)}
+          >
             <img src={image.file_url} alt="user_clothes" />
           </div>
         ))}
       </div>
+      {flippedImage && (
+        <div
+          className="flipped-image-overlay"
+          onClick={handleOverlayClick}
+        >
+          <div className="flipped-image">
+            <img src={flippedImage.file_url} alt="flipped_image" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

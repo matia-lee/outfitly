@@ -162,3 +162,31 @@
 .footwear-filter-icon {
   margin-right: 4px;
 }
+
+.flipped-image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flipped-image {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width: 400px;
+  height: 400px;
+}
+
+.flipped-image img {
+  width: 100%;
+  height: auto;
+}
