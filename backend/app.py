@@ -100,6 +100,33 @@ def commit_upload():
 
     return jsonify(message="Upload committed successfully", url=url, interaction=interaction), 200
 
+@app.route('/like_clothes', methods=['POST'])
+def like_clothes():
+    data = request.get_json()
+    image_id = data.get('imageId')
+
+    if not image_id:
+        return jsonify(error="Missing image id"), 400
+    
+    image_like = db_session.query(ImageModel).filter_by(id=image_id).first()
+
+    if not image_like:
+        return jsonify(erro="Error finding image id"), 404
+    
+    try:
+        if image_like.like == "like":
+            image_like.like = None
+        else:
+            image_like.like = "like"
+            
+        db_session.commit()
+    except Exception as e:
+        db_session.rollback() 
+        print(e)
+        return jsonify(error="Error saving to database"), 500
+    
+    return jsonify(message="Upload committed successfully"), 200
+
 @app.route('/get_clothes', methods=['GET'])
 def get_clothes():
     interaction_filter = request.args.get('interaction')
@@ -107,7 +134,7 @@ def get_clothes():
         clothes = db_session.query(ImageModel).filter(ImageModel.interaction == interaction_filter)
     else:
         clothes = db_session.query(ImageModel)
-    clothes_list = [{"id": image.id, "username": image.username, "file_url": image.file_url, "interaction": image.interaction} for image in clothes]
+    clothes_list = [{"id": image.id, "username": image.username, "file_url": image.file_url, "interaction": image.interaction, "like": image.like} for image in clothes]
     return jsonify(clothes_list)
 
 @app.route('/get_specific_clothes', methods=['GET'])

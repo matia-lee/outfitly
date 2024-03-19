@@ -15,6 +15,7 @@ class ImageModel(Base):
     username = Column(String(80), nullable=False)
     file_url = Column(String(255), nullable=False)
     interaction = Column(String(80), nullable=False)
+    like = Column(String(80), nullable=True)
 
 class Outfits(Base):
     __tablename__ ='fits'

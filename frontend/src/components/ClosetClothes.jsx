@@ -9,11 +9,16 @@ import HeadwearFilter from "../icons/HeadwearFilter";
 import TopFilterIcon from "../icons/TopFilterIcon";
 import BottomFilterIcon from "../icons/BottomFilterIcon";
 import FootwearFilterIcon from "../icons/FootwearFilter";
+import DeleteIcon from "../icons/DeleteIcon";
+import HeartIcon from "../icons/HeartIcon";
 
 const ClosetClothes = () => {
   const [images, setImages] = useState([]);
   const [currentFilter, setCurrentFilter] = useState("");
   const [flippedImage, setFlippedImage] = useState(false);
+  //not permanent:
+  const [likedImage, setLikedImage] = useState({});
+  //not permanent
   const navigate = useNavigate();
 
   const handleFilterClick = (filterName) => {
@@ -29,6 +34,32 @@ const ClosetClothes = () => {
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       setFlippedImage(false);
+    }
+  };
+
+  const handleLikeImage = async (imageId) => {
+    //not permanent:
+    setLikedImage((prevState) => ({
+      ...prevState,
+      [imageId]: !prevState[imageId],
+    }));
+    //not permanent
+
+    try {
+      const response = await fetch("http://localhost:5000/like_clothes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ imageId }),
+      });
+      if (!response.ok) {
+        throw new Error("Error!!!!!");
+      }
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error("Yo, check this out", error);
     }
   };
 
@@ -130,13 +161,18 @@ const ClosetClothes = () => {
         ))}
       </div>
       {flippedImage && (
-        <div
-          className="flipped-image-overlay"
-          onClick={handleOverlayClick}
-        >
+        <div className="flipped-image-overlay" onClick={handleOverlayClick}>
           <div className="flipped-image">
             <img src={flippedImage.file_url} alt="flipped_image" />
           </div>
+          <DeleteIcon className="delete-icon" />
+          <HeartIcon
+            className="heart-icon"
+            onClick={() => {
+              handleLikeImage(flippedImage.id);
+            }}
+            isFilled={likedImage[flippedImage.id]}
+          />
         </div>
       )}
     </div>
