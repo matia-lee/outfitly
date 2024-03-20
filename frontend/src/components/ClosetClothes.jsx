@@ -16,9 +16,7 @@ const ClosetClothes = () => {
   const [images, setImages] = useState([]);
   const [currentFilter, setCurrentFilter] = useState("");
   const [flippedImage, setFlippedImage] = useState(false);
-  //not permanent:
   const [likedImage, setLikedImage] = useState({});
-  //not permanent
   const navigate = useNavigate();
 
   const handleFilterClick = (filterName) => {
@@ -37,39 +35,55 @@ const ClosetClothes = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchImages = async () => {
+      const filterQuery = currentFilter ? `?interaction=${currentFilter}` : "";
+      try {
+        const response = await fetch(
+          `http://localhost:5000/get_clothes${filterQuery}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch");
+        }
+        const data = await response.json();
+        const updatedLikedImages = data.reduce(
+          (acc, image) => ({
+            ...acc,
+            [image.id]: image.like === "like", 
+          }),
+          {}
+        );
+        setLikedImage(updatedLikedImages);
+        setImages(data);
+      } catch (error) {
+        console.error("Error grabbing images:", error);
+      }
+    };
+
+    fetchImages();
+  }, [currentFilter]);
+
   const handleLikeImage = async (imageId) => {
-    //not permanent:
-    setLikedImage((prevState) => ({
-      ...prevState,
-      [imageId]: !prevState[imageId],
-    }));
-    //not permanent
+    const currentStatus = likedImage[imageId];
+    setLikedImage((prev) => ({ ...prev, [imageId]: !currentStatus }));
 
     try {
+      const likeStatusToSend = !currentStatus ? "like" : "none";
       const response = await fetch("http://localhost:5000/like_clothes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ imageId }),
+        body: JSON.stringify({ imageId, like: likeStatusToSend }),
       });
       if (!response.ok) {
-        throw new Error("Error!!!!!");
+        throw new Error("Failed to update like status");
       }
-      const data = await response.json();
-      console.log(data.message);
     } catch (error) {
-      console.error("Yo, check this out", error);
+      console.error("Error updating like status, reverting UI:", error);
+      setLikedImage((prev) => ({ ...prev, [imageId]: currentStatus }));
     }
   };
-
-  useEffect(() => {
-    const filterQuery = currentFilter ? `?interaction=${currentFilter}` : "";
-    fetch(`http://localhost:5000/get_clothes${filterQuery}`)
-      .then((response) => response.json())
-      .then((data) => setImages(data))
-      .catch((error) => console.error("Error grabbing images:", error));
-  }, [currentFilter]);
 
   useEffect(() => {
     if (flippedImage) {
@@ -77,9 +91,7 @@ const ClosetClothes = () => {
     } else {
       document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => (document.body.style.overflow = "");
   }, [flippedImage]);
 
   return (
@@ -171,7 +183,11 @@ const ClosetClothes = () => {
             onClick={() => {
               handleLikeImage(flippedImage.id);
             }}
-            isFilled={likedImage[flippedImage.id]}
+            isFilled={
+              likedImage[flippedImage.id] !== undefined
+                ? likedImage[flippedImage.id]
+                : flippedImage.like === "like"
+            }
           />
         </div>
       )}
