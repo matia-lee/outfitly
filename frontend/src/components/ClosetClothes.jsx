@@ -39,12 +39,10 @@ const ClosetClothes = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const filterQuery = currentFilter ? `?interaction=${currentFilter}` : "";
+      const filterQuery = currentFilter ? `&interaction=${currentFilter}` : "";
       try {
         const response = await fetch(
-          `http://localhost:5000/get_clothes?username=${encodeURIComponent(
-            username
-          )}${filterQuery}`
+          `http://localhost:5000/get_clothes?username=${encodeURIComponent(username)}${filterQuery}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch");

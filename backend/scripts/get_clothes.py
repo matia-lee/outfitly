@@ -4,16 +4,24 @@ from database.models import ImageModel
 from sqlalchemy import desc
 
 def get_clothes():
-    username = request.args.get("username")
-    interaction_filter = request.args.get("interaction")
-    query = db_session.query(ImageModel)
+    username = request.args.get('username')
+    interaction_type = request.args.get('interaction')
     
-    if username:
-        query = query.filter(ImageModel.username == username) 
+    query = db_session.query(ImageModel).filter(ImageModel.username == username)
+    
+    if interaction_type:
+        query = query.filter(ImageModel.interaction == interaction_type)
+    
+    clothes = query.order_by(ImageModel.id.desc()).all()
+    
+    clothes_list = [{
+        "id": clothe.id, 
+        "username": clothe.username, 
+        "file_url": clothe.file_url, 
+        "interaction": clothe.interaction, 
+        "like": clothe.like
+    } for clothe in clothes]
 
-    if interaction_filter:
-        query = query.filter(ImageModel.interaction == interaction_filter)
+    print(f"Username: {username}, Interaction: {interaction_type}")
     
-    clothes = query.order_by(desc(ImageModel.id))
-    clothes_list = [{"id": image.id, "username": image.username, "file_url": image.file_url, "interaction": image.interaction, "like": image.like} for image in clothes]
     return jsonify(clothes_list)
