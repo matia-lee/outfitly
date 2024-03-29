@@ -116,7 +116,7 @@ const Signup = () => {
       <div className="icon" onClick={handleHangerClick}>
         <Hanger className={spin ? "spin-animation" : ""} />
       </div>
-      <div className="title">Outfitly</div>
+      <div className="title-welcome-page">Outfitly</div>
       <h6 className="subtitle">Create account</h6>
       <div className="create-username">
         <div

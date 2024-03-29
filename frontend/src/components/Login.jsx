@@ -61,7 +61,7 @@ const Login = () => {
       <div className="icon" onClick={handleHangerClick}>
         <Hanger className={spin ? "spin-animation" : ""} />
       </div>
-      <div className="title">Outfitly</div>
+      <div className="title-welcome-page">Outfitly</div>
       <h6 className="subtitle">Login</h6>
       <div className="google-login" onClick={handleGoogleAuth}>
         <img
@@ -74,28 +74,42 @@ const Login = () => {
         <p>or</p>
       </div>
       <div className="enter-login-email">
-        <div className={`email-icon ${!validCredentials ? "invalid-email-icon" : ""}`}>
+        <div
+          className={`email-icon ${
+            !validCredentials ? "invalid-email-icon" : ""
+          }`}
+        >
           <EmailIcon />
         </div>
         <input
-          className={`email-input ${!validCredentials ? "invalid-email-input" : ""}`}
+          className={`email-input ${
+            !validCredentials ? "invalid-email-input" : ""
+          }`}
           type="email"
           placeholder="Enter email"
           onChange={(e) => setLoginEmail(e.target.value)}
         />
       </div>
       <div className="enter-login-password">
-        <div className={`password-icon ${!validCredentials ? "invalid-password-icon" : ""}`}>
+        <div
+          className={`password-icon ${
+            !validCredentials ? "invalid-password-icon" : ""
+          }`}
+        >
           <PasswordIcon />
         </div>
         <input
-          className={`password-input ${!validCredentials ? "invalid-password-input" : ""}`}
+          className={`password-input ${
+            !validCredentials ? "invalid-password-input" : ""
+          }`}
           type={passwordVisibility ? "password" : "text"}
           placeholder="Create password"
           onChange={(e) => setLoginPassword(e.target.value)}
         />
         <div
-          className={`password-visibility ${!validCredentials ? "invalid-password-visibility" : ""}`}
+          className={`password-visibility ${
+            !validCredentials ? "invalid-password-visibility" : ""
+          }`}
           onClick={handlePasswordVisibilityClick}
         >
           {passwordVisibility ? <ShowPassword /> : <HidePassword />}

@@ -16,7 +16,7 @@ const WelcomePage = () => {
 
   return (
     <div className="main-container">
-      <h1 className="title">Outfitly</h1>
+      <h1 className="title-welcome-page">Outfitly</h1>
       <h3 className="catchphrase">Outfits made simply.</h3>
       <button className="signup" onClick={handleSignupClick}>
         Signup to continue

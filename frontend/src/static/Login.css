@@ -39,7 +39,7 @@ body {
   animation: spin 0.7s cubic-bezier(0.32, 1, 0.45, 1) infinite;
 }
 
-.login-container .title {
+.login-container .title-welcome-page {
   color: rgba(255, 153, 153, 1);
   text-shadow: 3px 3px 3px rgba(255, 102, 102);
   font-family: "Madimi One", sans-serif;
