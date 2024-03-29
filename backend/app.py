@@ -6,6 +6,7 @@ from scripts.get_username import get_username
 from scripts.commit_upload import commit_upload
 from scripts.get_clothes import get_clothes
 from scripts.like_clothes import like_clothes
+from scripts.delete_clothes import delete_clothes
 from scripts.filter_clothes import get_specific_clothes
 from scripts.fit_check import save_outfit
 from scripts.get_fits import get_fits
@@ -21,7 +22,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS"]}})
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS", "DELETE"]}})
 
 
 #for signing up/ logging in 
@@ -38,6 +39,9 @@ app.add_url_rule('/get_clothes', view_func=get_clothes, methods=['GET'])
 
 # logic to like clothes
 app.add_url_rule('/like_clothes', view_func=like_clothes, methods=['POST'])
+
+# logic to delete clothes
+app.add_url_rule('/delete_clothes/<int:image_id>', view_func=delete_clothes, methods=['DELETE'])
 
 # grab clothes by their filter
 app.add_url_rule('/get_specific_clothes', view_func=get_specific_clothes, methods=['GET'])

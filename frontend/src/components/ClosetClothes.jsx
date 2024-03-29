@@ -1,6 +1,7 @@
 import "../static/ClosetClothes.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 import Hanger from "../icons/Hanger";
 import UploadIcon from "../icons/UploadIcon";
 import CreateIcon from "../icons/CreateIcon";
@@ -18,6 +19,7 @@ const ClosetClothes = () => {
   const [flippedImage, setFlippedImage] = useState(false);
   const [likedImage, setLikedImage] = useState({});
   const navigate = useNavigate();
+  const { username } = useAuth();
 
   const handleFilterClick = (filterName) => {
     setCurrentFilter((prevFilter) =>
@@ -40,7 +42,9 @@ const ClosetClothes = () => {
       const filterQuery = currentFilter ? `?interaction=${currentFilter}` : "";
       try {
         const response = await fetch(
-          `http://localhost:5000/get_clothes${filterQuery}`
+          `http://localhost:5000/get_clothes?username=${encodeURIComponent(
+            username
+          )}${filterQuery}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch");
@@ -49,7 +53,7 @@ const ClosetClothes = () => {
         const updatedLikedImages = data.reduce(
           (acc, image) => ({
             ...acc,
-            [image.id]: image.like === "like", 
+            [image.id]: image.like === "like",
           }),
           {}
         );
@@ -61,7 +65,7 @@ const ClosetClothes = () => {
     };
 
     fetchImages();
-  }, [currentFilter]);
+  }, [currentFilter, username]);
 
   const handleLikeImage = async (imageId) => {
     const currentStatus = likedImage[imageId];
@@ -84,6 +88,24 @@ const ClosetClothes = () => {
       setLikedImage((prev) => ({ ...prev, [imageId]: currentStatus }));
     }
   };
+
+  const handleDeleteImage = async (imageId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/delete_clothes/${imageId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to delete image");
+      }
+      setImages(images.filter((image) => image.id !== imageId));
+      setFlippedImage(false);
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
+};
 
   useEffect(() => {
     if (flippedImage) {
@@ -177,7 +199,12 @@ const ClosetClothes = () => {
           <div className="flipped-image">
             <img src={flippedImage.file_url} alt="flipped_image" />
           </div>
-          <DeleteIcon className="delete-icon" />
+          <DeleteIcon
+            className="delete-icon"
+            onClick={() => {
+              handleDeleteImage(flippedImage.id);
+            }}
+          />
           <HeartIcon
             className="heart-icon"
             onClick={() => {

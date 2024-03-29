@@ -1,11 +1,13 @@
 import "../static/ClosetFits.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 import Hanger from "../icons/Hanger";
 
 const ClosetFits = () => {
   const [spin, setSpin] = useState(false);
   const [images, setImages] = useState([]);
+  const { username } = useAuth();
 
   const navigate = useNavigate();
 
@@ -19,11 +21,13 @@ const ClosetFits = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/get_fits")
+    fetch(
+      `http://localhost:5000/get_fits?username=${encodeURIComponent(username)}`
+    )
       .then((response) => response.json())
       .then((data) => setImages(data))
       .catch((error) => console.error("Error grabbing images", error));
-  }, []);
+  }, [username]);
 
   return (
     <div>
